@@ -1,0 +1,333 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="LubriXpressModelStoreContainer" CdmEntityContainer="LubriXpressEntities">
+    <EntitySetMapping Name="Carros">
+      <EntityTypeMapping TypeName="LubriXpressModel.Carro">
+        <MappingFragment StoreEntitySet="Carros">
+          <ScalarProperty Name="placa" ColumnName="placa" />
+          <ScalarProperty Name="marca" ColumnName="marca" />
+          <ScalarProperty Name="modelo" ColumnName="modelo" />
+          <ScalarProperty Name="anio" ColumnName="anio" />
+          <ScalarProperty Name="motor" ColumnName="motor" />
+          <ScalarProperty Name="VIN" ColumnName="VIN" />
+          <ScalarProperty Name="comentario" ColumnName="comentario" />
+          <ScalarProperty Name="fecha_creacion" ColumnName="fecha_creacion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Citas">
+      <EntityTypeMapping TypeName="LubriXpressModel.Cita">
+        <MappingFragment StoreEntitySet="Citas">
+          <ScalarProperty Name="id_cita" ColumnName="id_cita" />
+          <ScalarProperty Name="id_servicio" ColumnName="id_servicio" />
+          <ScalarProperty Name="nombre_cliente" ColumnName="nombre_cliente" />
+          <ScalarProperty Name="apellidos_cliente" ColumnName="apellidos_cliente" />
+          <ScalarProperty Name="telefono_cliente" ColumnName="telefono_cliente" />
+          <ScalarProperty Name="email_cliente" ColumnName="email_cliente" />
+          <ScalarProperty Name="direccion" ColumnName="direccion" />
+          <ScalarProperty Name="fecha_estimada" ColumnName="fecha_estimada" />
+          <ScalarProperty Name="marca_vehiculo" ColumnName="marca_vehiculo" />
+          <ScalarProperty Name="modelo_vehiculo" ColumnName="modelo_vehiculo" />
+          <ScalarProperty Name="placa_vehiculo" ColumnName="placa_vehiculo" />
+          <ScalarProperty Name="anio_vehiculo" ColumnName="anio_vehiculo" />
+          <ScalarProperty Name="estado_cita" ColumnName="estado_cita" />
+          <ScalarProperty Name="fecha_creacion" ColumnName="fecha_creacion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ErrorLogs">
+      <EntityTypeMapping TypeName="LubriXpressModel.ErrorLog">
+        <MappingFragment StoreEntitySet="ErrorLog">
+          <ScalarProperty Name="LogId" ColumnName="LogId" />
+          <ScalarProperty Name="DateAndTime" ColumnName="DateAndTime" />
+          <ScalarProperty Name="Message" ColumnName="Message" />
+          <ScalarProperty Name="Origin" ColumnName="Origin" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Resenas">
+      <EntityTypeMapping TypeName="LubriXpressModel.Resena">
+        <MappingFragment StoreEntitySet="Resenas">
+          <ScalarProperty Name="id_resena" ColumnName="id_resena" />
+          <ScalarProperty Name="nombre_cliente" ColumnName="nombre_cliente" />
+          <ScalarProperty Name="apellidos_cliente" ColumnName="apellidos_cliente" />
+          <ScalarProperty Name="telefono_cliente" ColumnName="telefono_cliente" />
+          <ScalarProperty Name="email_cliente" ColumnName="email_cliente" />
+          <ScalarProperty Name="calificacion" ColumnName="calificacion" />
+          <ScalarProperty Name="comentario" ColumnName="comentario" />
+          <ScalarProperty Name="fecha_creacion" ColumnName="fecha_creacion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Rols">
+      <EntityTypeMapping TypeName="LubriXpressModel.Rol">
+        <MappingFragment StoreEntitySet="Rol">
+          <ScalarProperty Name="id_rol" ColumnName="id_rol" />
+          <ScalarProperty Name="nombre_rol" ColumnName="nombre_rol" />
+          <ScalarProperty Name="fecha_creacion" ColumnName="fecha_creacion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Servicios">
+      <EntityTypeMapping TypeName="LubriXpressModel.Servicio">
+        <MappingFragment StoreEntitySet="Servicios">
+          <ScalarProperty Name="id_servicio" ColumnName="id_servicio" />
+          <ScalarProperty Name="nombre_servicio" ColumnName="nombre_servicio" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="duracion" ColumnName="duracion" />
+          <ScalarProperty Name="imagen_servicio" ColumnName="imagen_servicio" />
+          <ScalarProperty Name="fecha_creacion" ColumnName="fecha_creacion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Status">
+      <EntityTypeMapping TypeName="LubriXpressModel.Status">
+        <MappingFragment StoreEntitySet="Status">
+          <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Usuarios">
+      <EntityTypeMapping TypeName="LubriXpressModel.Usuario">
+        <MappingFragment StoreEntitySet="Usuarios">
+          <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+          <ScalarProperty Name="cedula" ColumnName="cedula" />
+          <ScalarProperty Name="fecha_nacimiento" ColumnName="fecha_nacimiento" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="contrasena" ColumnName="contrasena" />
+          <ScalarProperty Name="id_rol" ColumnName="id_rol" />
+          <ScalarProperty Name="fecha_creacion" ColumnName="fecha_creacion" />
+          <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+          <ScalarProperty Name="lastactivity" ColumnName="lastactivity" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="ActualizarUsuario" FunctionName="LubriXpressModel.Store.ActualizarUsuario" />
+    <FunctionImportMapping FunctionImportName="Crearcarro" FunctionName="LubriXpressModel.Store.Crearcarro" />
+    <FunctionImportMapping FunctionImportName="CrearCita" FunctionName="LubriXpressModel.Store.CrearCita" />
+    <FunctionImportMapping FunctionImportName="CrearResena" FunctionName="LubriXpressModel.Store.CrearResena" />
+    <FunctionImportMapping FunctionImportName="CrearRol" FunctionName="LubriXpressModel.Store.CrearRol" />
+    <FunctionImportMapping FunctionImportName="CrearServicio" FunctionName="LubriXpressModel.Store.CrearServicio" />
+    <FunctionImportMapping FunctionImportName="CrearUsuario" FunctionName="LubriXpressModel.Store.CrearUsuario" />
+    <FunctionImportMapping FunctionImportName="EditarCitas" FunctionName="LubriXpressModel.Store.EditarCitas" />
+    <FunctionImportMapping FunctionImportName="EditarRol" FunctionName="LubriXpressModel.Store.EditarRol" />
+    <FunctionImportMapping FunctionImportName="EditarServicio" FunctionName="LubriXpressModel.Store.EditarServicio" />
+    <FunctionImportMapping FunctionImportName="EditCar" FunctionName="LubriXpressModel.Store.EditCar" />
+    <FunctionImportMapping FunctionImportName="EliminarCarro" FunctionName="LubriXpressModel.Store.EliminarCarro" />
+    <FunctionImportMapping FunctionImportName="EliminarCita" FunctionName="LubriXpressModel.Store.EliminarCita" />
+    <FunctionImportMapping FunctionImportName="EliminarResena" FunctionName="LubriXpressModel.Store.EliminarResena" />
+    <FunctionImportMapping FunctionImportName="EliminarRol" FunctionName="LubriXpressModel.Store.EliminarRol" />
+    <FunctionImportMapping FunctionImportName="EliminarServicio" FunctionName="LubriXpressModel.Store.EliminarServicio" />
+    <FunctionImportMapping FunctionImportName="EliminarUsuario" FunctionName="LubriXpressModel.Store.EliminarUsuario" />
+    <FunctionImportMapping FunctionImportName="IniciarSesion" FunctionName="LubriXpressModel.Store.IniciarSesion">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="LubriXpressModel.IniciarSesion_Result">
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="id_Rol" ColumnName="id_Rol" />
+          <ScalarProperty Name="nombre_rol" ColumnName="nombre_rol" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Login" FunctionName="LubriXpressModel.Store.Login">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="LubriXpressModel.Login_Result">
+          <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+          <ScalarProperty Name="id_rol" ColumnName="id_rol" />
+          <ScalarProperty Name="nombre_rol" ColumnName="nombre_rol" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SeeStatus" FunctionName="LubriXpressModel.Store.SeeStatus">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="LubriXpressModel.SeeStatus_Result">
+          <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="UsuarioXcedula" FunctionName="LubriXpressModel.Store.UsuarioXcedula">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="LubriXpressModel.UsuarioXcedula_Result">
+          <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+          <ScalarProperty Name="cedula" ColumnName="cedula" />
+          <ScalarProperty Name="fecha_nacimiento" ColumnName="fecha_nacimiento" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="contrasena" ColumnName="contrasena" />
+          <ScalarProperty Name="id_rol" ColumnName="id_rol" />
+          <ScalarProperty Name="fecha_creacion" ColumnName="fecha_creacion" />
+          <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+          <ScalarProperty Name="lastactivity" ColumnName="lastactivity" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="UsuarioXid" FunctionName="LubriXpressModel.Store.UsuarioXid">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="LubriXpressModel.UsuarioXid_Result">
+          <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+          <ScalarProperty Name="cedula" ColumnName="cedula" />
+          <ScalarProperty Name="fecha_nacimiento" ColumnName="fecha_nacimiento" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="contrasena" ColumnName="contrasena" />
+          <ScalarProperty Name="id_rol" ColumnName="id_rol" />
+          <ScalarProperty Name="fecha_creacion" ColumnName="fecha_creacion" />
+          <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+          <ScalarProperty Name="lastactivity" ColumnName="lastactivity" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="VerActivos" FunctionName="LubriXpressModel.Store.VerActivos">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="LubriXpressModel.VerActivos_Result">
+          <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+          <ScalarProperty Name="cedula" ColumnName="cedula" />
+          <ScalarProperty Name="fecha_nacimiento" ColumnName="fecha_nacimiento" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="contrasena" ColumnName="contrasena" />
+          <ScalarProperty Name="id_rol" ColumnName="id_rol" />
+          <ScalarProperty Name="fecha_creacion" ColumnName="fecha_creacion" />
+          <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+          <ScalarProperty Name="lastactivity" ColumnName="lastactivity" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="VerCaros" FunctionName="LubriXpressModel.Store.VerCaros">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="LubriXpressModel.VerCaros_Result">
+          <ScalarProperty Name="placa" ColumnName="placa" />
+          <ScalarProperty Name="marca" ColumnName="marca" />
+          <ScalarProperty Name="modelo" ColumnName="modelo" />
+          <ScalarProperty Name="anio" ColumnName="anio" />
+          <ScalarProperty Name="motor" ColumnName="motor" />
+          <ScalarProperty Name="VIN" ColumnName="VIN" />
+          <ScalarProperty Name="comentario" ColumnName="comentario" />
+          <ScalarProperty Name="fecha_creacion" ColumnName="fecha_creacion" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="VerCarroPorPlaca" FunctionName="LubriXpressModel.Store.VerCarroPorPlaca">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="LubriXpressModel.VerCarroPorPlaca_Result">
+          <ScalarProperty Name="placa" ColumnName="placa" />
+          <ScalarProperty Name="marca" ColumnName="marca" />
+          <ScalarProperty Name="modelo" ColumnName="modelo" />
+          <ScalarProperty Name="anio" ColumnName="anio" />
+          <ScalarProperty Name="motor" ColumnName="motor" />
+          <ScalarProperty Name="VIN" ColumnName="VIN" />
+          <ScalarProperty Name="comentario" ColumnName="comentario" />
+          <ScalarProperty Name="fecha_creacion" ColumnName="fecha_creacion" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="VerCitas" FunctionName="LubriXpressModel.Store.VerCitas">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="LubriXpressModel.VerCitas_Result">
+          <ScalarProperty Name="id_cita" ColumnName="id_cita" />
+          <ScalarProperty Name="nombre_cliente" ColumnName="nombre_cliente" />
+          <ScalarProperty Name="apellidos_cliente" ColumnName="apellidos_cliente" />
+          <ScalarProperty Name="telefono_cliente" ColumnName="telefono_cliente" />
+          <ScalarProperty Name="email_cliente" ColumnName="email_cliente" />
+          <ScalarProperty Name="direccion" ColumnName="direccion" />
+          <ScalarProperty Name="servicio_solicitado" ColumnName="servicio_solicitado" />
+          <ScalarProperty Name="fecha_estimada" ColumnName="fecha_estimada" />
+          <ScalarProperty Name="marca_vehiculo" ColumnName="marca_vehiculo" />
+          <ScalarProperty Name="modelo_vehiculo" ColumnName="modelo_vehiculo" />
+          <ScalarProperty Name="placa_vehiculo" ColumnName="placa_vehiculo" />
+          <ScalarProperty Name="anio_vehiculo" ColumnName="anio_vehiculo" />
+          <ScalarProperty Name="estado_cita" ColumnName="estado_cita" />
+          <ScalarProperty Name="fecha_creacion" ColumnName="fecha_creacion" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="VerResenaPorId" FunctionName="LubriXpressModel.Store.VerResenaPorId">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="LubriXpressModel.VerResenaPorId_Result">
+          <ScalarProperty Name="id_resena" ColumnName="id_resena" />
+          <ScalarProperty Name="nombre_cliente" ColumnName="nombre_cliente" />
+          <ScalarProperty Name="apellidos_cliente" ColumnName="apellidos_cliente" />
+          <ScalarProperty Name="telefono_cliente" ColumnName="telefono_cliente" />
+          <ScalarProperty Name="email_cliente" ColumnName="email_cliente" />
+          <ScalarProperty Name="calificacion" ColumnName="calificacion" />
+          <ScalarProperty Name="comentario" ColumnName="comentario" />
+          <ScalarProperty Name="fecha_creacion" ColumnName="fecha_creacion" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="VerResenas" FunctionName="LubriXpressModel.Store.VerResenas">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="LubriXpressModel.VerResenas_Result">
+          <ScalarProperty Name="id_resena" ColumnName="id_resena" />
+          <ScalarProperty Name="nombre_cliente" ColumnName="nombre_cliente" />
+          <ScalarProperty Name="apellidos_cliente" ColumnName="apellidos_cliente" />
+          <ScalarProperty Name="telefono_cliente" ColumnName="telefono_cliente" />
+          <ScalarProperty Name="email_cliente" ColumnName="email_cliente" />
+          <ScalarProperty Name="calificacion" ColumnName="calificacion" />
+          <ScalarProperty Name="comentario" ColumnName="comentario" />
+          <ScalarProperty Name="fecha_creacion" ColumnName="fecha_creacion" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="VerRoles" FunctionName="LubriXpressModel.Store.VerRoles">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="LubriXpressModel.VerRoles_Result">
+          <ScalarProperty Name="id_rol" ColumnName="id_rol" />
+          <ScalarProperty Name="nombre_rol" ColumnName="nombre_rol" />
+          <ScalarProperty Name="fecha_creacion" ColumnName="fecha_creacion" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="VerRolPorId" FunctionName="LubriXpressModel.Store.VerRolPorId">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="LubriXpressModel.VerRolPorId_Result">
+          <ScalarProperty Name="id_rol" ColumnName="id_rol" />
+          <ScalarProperty Name="nombre_rol" ColumnName="nombre_rol" />
+          <ScalarProperty Name="fecha_creacion" ColumnName="fecha_creacion" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="VerServicios" FunctionName="LubriXpressModel.Store.VerServicios">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="LubriXpressModel.VerServicios_Result">
+          <ScalarProperty Name="id_servicio" ColumnName="id_servicio" />
+          <ScalarProperty Name="nombre_servicio" ColumnName="nombre_servicio" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="duracion" ColumnName="duracion" />
+          <ScalarProperty Name="imagen_servicio" ColumnName="imagen_servicio" />
+          <ScalarProperty Name="fecha_creacion" ColumnName="fecha_creacion" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="VerUsuarioPorId" FunctionName="LubriXpressModel.Store.VerUsuarioPorId">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="LubriXpressModel.VerUsuarioPorId_Result">
+          <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="nombre_rol" ColumnName="nombre_rol" />
+          <ScalarProperty Name="fecha_creacion" ColumnName="fecha_creacion" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="VerUsuarios" FunctionName="LubriXpressModel.Store.VerUsuarios">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="LubriXpressModel.VerUsuarios_Result">
+          <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+          <ScalarProperty Name="cedula" ColumnName="cedula" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="fecha_nacimiento" ColumnName="fecha_nacimiento" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="nombre_rol" ColumnName="nombre_rol" />
+          <ScalarProperty Name="fecha_creacion" ColumnName="fecha_creacion" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>

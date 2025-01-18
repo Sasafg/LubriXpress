@@ -1,0 +1,96 @@
+﻿@model Web_LX.Entities.Citas
+
+@{
+    ViewBag.Title = "SolicitarCita";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("SolicitarCita", "Home", FormMethod.Post, new { id = "SolicitarCitaForm" }))
+{
+    <section id="cita" class="d-flex justify-content-center align-items-center" style="background: url(../../assets/Home/img/lubri/8.png)">
+        <div>
+            <div class="container" style="padding-bottom: 10%; margin-top: 5%;">
+                <div id="DivForm" class="row justify-content-center align-items-center" style="margin-top: -10%; padding-top: 5%;">
+                    <div class="col-12 col-md-8 col-lg-6 col-xl-5" style="width: 100%">
+                        <div class="card-body p-5 text-center">
+                            <div class="mb-md-5 mt-md-4 pb-1" style="color: black; font-weight: bold; background-color: rgba(255, 255, 255, 0.5);">
+                                <h2 class="fw-bold text-uppercase" style="color: black; margin-top:3%">SOLICITAR CITA</h2>
+                                <p class="text-black">Por favor ingrese sus datos y los de su vehículo para generar la cita</p>
+                                <!-- Formulario -->
+                                <div class="row">
+                                    <!-- Primer bloque de campos -->
+                                    <div class="col-md-5 mx-auto">
+                                        <div class="form-group" style="text-align: left">
+                                            <label>Nombre</label>
+                                            @Html.TextBoxFor(m => m.nombre_cliente, new { @class = "form-control form-control-lg" })
+                                        </div>
+                                        <div class="form-group" style="text-align: left">
+                                            <label>Apellidos</label>
+                                            @Html.TextBoxFor(m => m.apellidos_cliente, new { @class = "form-control form-control-lg" })
+                                        </div>
+                                        <div class="form-group" style="text-align: left">
+                                            <label>Teléfono</label>
+                                            @Html.TextBoxFor(m => m.telefono_cliente, new { @class = "form-control form-control-lg" })
+                                        </div>
+                                        <div class="form-group" style="text-align: left">
+                                            <label>Correo Electrónico</label>
+                                            @Html.TextBoxFor(m => m.email_cliente, new { @class = "form-control form-control-lg" })
+                                        </div>
+                                        <div class="form-group" style="text-align: left">
+                                            <label>Dirección</label>
+                                            @Html.TextBoxFor(m => m.direccion, new { @class = "form-control form-control-lg" })
+                                        </div>
+                                    </div>
+                                    <!-- Segundo bloque de campos -->
+                                    <div class="col-md-5 mx-auto">
+                                        <div class="form-group" style="text-align: left">
+                                            <label>Placa del Vehículo</label>
+                                            @Html.TextBoxFor(m => m.placa_vehiculo, new { @class = "form-control form-control-lg" })
+                                        </div>
+                                        <div class="form-group" style="text-align: left">
+                                            <label>Marca del Vehículo</label>
+                                            @Html.TextBoxFor(m => m.marca_vehiculo, new { @class = "form-control form-control-lg" })
+                                        </div>
+                                        <div class="form-group" style="text-align: left">
+                                            <label>Modelo del Vehículo</label>
+                                            @Html.TextBoxFor(m => m.modelo_vehiculo, new { @class = "form-control form-control-lg" })
+                                        </div>
+                                        <div class="form-group" style="text-align: left">
+                                            <label>Año del Vehículo</label>
+                                            @Html.TextBoxFor(m => m.anio_vehiculo, new { @class = "form-control form-control-lg" })
+                                        </div>
+                                        <div class="form-group" style="text-align: left">
+                                            <label>Fecha Estimada</label>
+                                            @Html.TextBoxFor(m => m.fecha_estimada, new { @type = "date", @class = "form-control form-control-lg" })
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <p class="text-black mb-4" style="text-decoration: underline;">Al finalizar la solicitud de la cita, un técnico le contactará para confirmar la información</p>
+
+                                <div class="d-flex justify-content-center">
+                                    <button type="button" class="btn btn-dark btn-lg w-50" data-bs-toggle="modal" data-bs-target="#basicModal">Solicitar Cita</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal -->
+    <div class="modal fade" id="successModal" tabindex="-1">
+        <div class="modal-dialog justify-content-center align-items-center" style="margin-top: 15%">
+            <div class="modal-content justify-content-center align-items-center">
+                <div class="modal-header align-items-center">
+                    <h5 class="modal-title"><i class="bi bi-award-fill text-success"></i> Felicidades <i class="bi bi-award-fill text-success"></i></h5>
+                </div>
+                <div class="modal-body" style="text-align:center">¡Felicidades! Ha completado el proceso de prematrícula. Nos pondremos en contacto para continuar.</div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}

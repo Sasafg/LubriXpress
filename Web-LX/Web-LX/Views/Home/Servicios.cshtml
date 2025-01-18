@@ -1,0 +1,99 @@
+﻿@model Web_LX.Entities.Citas
+
+@{
+    ViewBag.Title = "SolicitarCita";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+    <section id="cita" class="d-flex justify-content-center align-items-center"  >
+        <div>
+            <div class="container" style="padding-bottom: 30vh; margin-top: 15vh">
+                <div id="DivForm" class="row justify-content-center align-items-center" style="margin-top: -10%; padding-top: 5%;">
+                    <div class="col-12 col-md-8 col-lg-6 col-xl-5" style="width: 100%">
+                        <h1>Servicios que Ofrecemos</h1>
+
+                        <div class="cards-container">
+                            <div class="card">
+                                <div class="card-inner">
+                                    <div class="card-front">
+                                        <img src="~/assets/Home/img/varios/Cambio-de-aceite.jpg" alt="Servicio 1">
+                                    </div>
+                                    <div class="card-back">
+                                        <p>Cambio de aceite de caja Automático/Manual</p>
+                                        <button class="btn">Solicitar servicio</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-inner">
+                                    <div class="card-front">
+                                        <img src="~/assets/Home/img/varios/filtros.jpg" alt="Servicio 2">
+                                    </div>
+                                    <div class="card-back">
+                                        <p>Cambio de todos los filtros</p>
+                                        <button class="btn">Solicitar servicio</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-inner">
+                                    <div class="card-front">
+                                        <img src="~/assets/Home/img/varios/frenos.jpg" alt="Servicio 3">
+                                    </div>
+                                    <div class="card-back">
+                                        <p>Revisión de Frenos</p>
+                                        <button class="btn">Solicitar servicio</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-inner">
+                                    <div class="card-front">
+                                        <img src="~/assets/Home/img/varios/scaneo.jpg" alt="Servicio 4">
+                                    </div>
+                                    <div class="card-back">
+                                        <p>Escaneo general y diagnóstico</p>
+                                        <button class="btn">Solicitar servicio</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-inner">
+                                    <div class="card-front">
+                                        <img src="~/assets/Home/img/mecanico/mecanico3.jpg" alt="Servicio 5">
+                                    </div>
+                                    <div class="card-back">
+                                        <p>Cambio de aceite</p>
+                                        <button class="btn">Solicitar servicio</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal -->
+    <div class="modal fade" id="successModal" tabindex="-1">
+        <div class="modal-dialog justify-content-center align-items-center" style="margin-top: 15%">
+            <div class="modal-content justify-content-center align-items-center">
+                <div class="modal-header align-items-center">
+                    <h5 class="modal-title"><i class="bi bi-award-fill text-success"></i> Felicidades <i class="bi bi-award-fill text-success"></i></h5>
+                </div>
+                <div class="modal-body" style="text-align:center">¡Felicidades! Ha completado el proceso de prematrícula. Nos pondremos en contacto para continuar.</div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}

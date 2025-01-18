@@ -1,0 +1,311 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="LubriXpressModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <!--Errores durante la generación:
+advertencia 6013: La tabla o vista 'LubriXpress.dbo.ActionLog' no tiene definida una clave principal y no es posible inferir ninguna clave principal válida. Esta tabla o vista se ha excluido. Para usar la entidad, necesitará revisar el esquema, agregar las claves correctas y quitar sus comentarios.
+        <EntityType Name="ActionLog">
+          <Property Name="LogId" Type="bigint" />
+          <Property Name="DateAndTime" Type="datetime" />
+          <Property Name="Message" Type="varchar" MaxLength="5000" />
+          <Property Name="Origin" Type="varchar" MaxLength="5000" />
+          <Property Name="UserId" Type="bigint" />
+        </EntityType>-->
+  <EntityType Name="Carros">
+    <Key>
+      <PropertyRef Name="placa" />
+    </Key>
+    <Property Name="placa" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="marca" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="modelo" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="anio" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="motor" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="VIN" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="comentario" Type="text" />
+    <Property Name="fecha_creacion" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Citas">
+    <Key>
+      <PropertyRef Name="id_cita" />
+    </Key>
+    <Property Name="id_cita" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_servicio" Type="int" />
+    <Property Name="nombre_cliente" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="apellidos_cliente" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="telefono_cliente" Type="varchar" MaxLength="15" />
+    <Property Name="email_cliente" Type="varchar" MaxLength="100" />
+    <Property Name="direccion" Type="varchar" MaxLength="100" />
+    <Property Name="fecha_estimada" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="marca_vehiculo" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="modelo_vehiculo" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="placa_vehiculo" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="anio_vehiculo" Type="varchar" MaxLength="10" />
+    <Property Name="estado_cita" Type="varchar" MaxLength="10" />
+    <Property Name="fecha_creacion" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="ErrorLog">
+    <Key>
+      <PropertyRef Name="LogId" />
+    </Key>
+    <Property Name="LogId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DateAndTime" Type="datetime" Nullable="false" />
+    <Property Name="Message" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Origin" Type="nvarchar" MaxLength="255" />
+    <Property Name="UserId" Type="int" />
+  </EntityType>
+  <EntityType Name="Resenas">
+    <Key>
+      <PropertyRef Name="id_resena" />
+    </Key>
+    <Property Name="id_resena" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombre_cliente" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="apellidos_cliente" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="telefono_cliente" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="email_cliente" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="calificacion" Type="int" />
+    <Property Name="comentario" Type="text" />
+    <Property Name="fecha_creacion" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Rol">
+    <Key>
+      <PropertyRef Name="id_rol" />
+    </Key>
+    <Property Name="id_rol" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombre_rol" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="fecha_creacion" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Servicios">
+    <Key>
+      <PropertyRef Name="id_servicio" />
+    </Key>
+    <Property Name="id_servicio" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombre_servicio" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="descripcion" Type="text" />
+    <Property Name="duracion" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="imagen_servicio" Type="varchar" MaxLength="255" />
+    <Property Name="fecha_creacion" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Status">
+    <Key>
+      <PropertyRef Name="StatusId" />
+    </Key>
+    <Property Name="StatusId" Type="bigint" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="Usuarios">
+    <Key>
+      <PropertyRef Name="id_usuario" />
+    </Key>
+    <Property Name="id_usuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="cedula" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="fecha_nacimiento" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="nombre" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="email" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="contrasena" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="id_rol" Type="int" Nullable="false" />
+    <Property Name="fecha_creacion" Type="datetime" />
+    <Property Name="StatusId" Type="bigint" />
+    <Property Name="lastactivity" Type="datetime" />
+  </EntityType>
+  <Association Name="FK__Citas__id_servic__3D5E1FD2">
+    <End Role="Servicios" Type="Self.Servicios" Multiplicity="0..1" />
+    <End Role="Citas" Type="Self.Citas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Servicios">
+        <PropertyRef Name="id_servicio" />
+      </Principal>
+      <Dependent Role="Citas">
+        <PropertyRef Name="id_servicio" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Usuarios_Rol">
+    <End Role="Rol" Type="Self.Rol" Multiplicity="1" />
+    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Rol">
+        <PropertyRef Name="id_rol" />
+      </Principal>
+      <Dependent Role="Usuarios">
+        <PropertyRef Name="id_rol" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Usuarios_Status">
+    <End Role="Status" Type="Self.Status" Multiplicity="0..1" />
+    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Status">
+        <PropertyRef Name="StatusId" />
+      </Principal>
+      <Dependent Role="Usuarios">
+        <PropertyRef Name="StatusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="ActualizarUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id_usuario" Type="int" Mode="In" />
+    <Parameter Name="nombre" Type="varchar" Mode="In" />
+    <Parameter Name="email" Type="varchar" Mode="In" />
+    <Parameter Name="contrasena" Type="varchar" Mode="In" />
+    <Parameter Name="id_rol" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Crearcarro" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="placa" Type="varchar" Mode="In" />
+    <Parameter Name="marca" Type="varchar" Mode="In" />
+    <Parameter Name="modelo" Type="varchar" Mode="In" />
+    <Parameter Name="anio" Type="varchar" Mode="In" />
+    <Parameter Name="motor" Type="varchar" Mode="In" />
+    <Parameter Name="VIN" Type="varchar" Mode="In" />
+    <Parameter Name="comentario" Type="text" Mode="In" />
+    <Parameter Name="fecha_creacion" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="CrearCita" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id_servicio" Type="int" Mode="In" />
+    <Parameter Name="nombre_cliente" Type="varchar" Mode="In" />
+    <Parameter Name="apellidos_cliente" Type="varchar" Mode="In" />
+    <Parameter Name="telefono_cliente" Type="varchar" Mode="In" />
+    <Parameter Name="email_cliente" Type="varchar" Mode="In" />
+    <Parameter Name="direccion" Type="varchar" Mode="In" />
+    <Parameter Name="fecha_estimada" Type="varchar" Mode="In" />
+    <Parameter Name="marca_vehiculo" Type="varchar" Mode="In" />
+    <Parameter Name="modelo_vehiculo" Type="varchar" Mode="In" />
+    <Parameter Name="placa_vehiculo" Type="varchar" Mode="In" />
+    <Parameter Name="anio_vehiculo" Type="varchar" Mode="In" />
+    <Parameter Name="estado_cita" Type="varchar" Mode="In" />
+    <Parameter Name="fecha_creacion" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="CrearResena" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="nombre_cliente" Type="varchar" Mode="In" />
+    <Parameter Name="apellidos_cliente" Type="varchar" Mode="In" />
+    <Parameter Name="telefono_cliente" Type="varchar" Mode="In" />
+    <Parameter Name="email_cliente" Type="varchar" Mode="In" />
+    <Parameter Name="calificacion" Type="int" Mode="In" />
+    <Parameter Name="comentario" Type="text" Mode="In" />
+    <Parameter Name="fecha_creacion" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="CrearRol" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="nombre_rol" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="CrearServicio" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="nombre_servicio" Type="varchar" Mode="In" />
+    <Parameter Name="descripcion" Type="text" Mode="In" />
+    <Parameter Name="duracion" Type="varchar" Mode="In" />
+    <Parameter Name="imagen_servicio" Type="varchar" Mode="In" />
+    <Parameter Name="fecha_creacion" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="CrearUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="nombre" Type="varchar" Mode="In" />
+    <Parameter Name="email" Type="varchar" Mode="In" />
+    <Parameter Name="contrasena" Type="varchar" Mode="In" />
+    <Parameter Name="id_rol" Type="int" Mode="In" />
+  </Function>
+  <Function Name="EditarCitas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id_cita" Type="int" Mode="In" />
+    <Parameter Name="id_servicio" Type="int" Mode="In" />
+    <Parameter Name="nombre_cliente" Type="varchar" Mode="In" />
+    <Parameter Name="apellidos_cliente" Type="varchar" Mode="In" />
+    <Parameter Name="telefono_cliente" Type="varchar" Mode="In" />
+    <Parameter Name="email_cliente" Type="varchar" Mode="In" />
+    <Parameter Name="direccion" Type="varchar" Mode="In" />
+    <Parameter Name="fecha_estimada" Type="varchar" Mode="In" />
+    <Parameter Name="marca_vehiculo" Type="varchar" Mode="In" />
+    <Parameter Name="modelo_vehiculo" Type="varchar" Mode="In" />
+    <Parameter Name="placa_vehiculo" Type="varchar" Mode="In" />
+    <Parameter Name="anio_vehiculo" Type="varchar" Mode="In" />
+    <Parameter Name="estado_cita" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="EditarRol" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id_rol" Type="int" Mode="In" />
+    <Parameter Name="nombre_rol" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="EditarServicio" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id_servicio" Type="int" Mode="In" />
+    <Parameter Name="nombre_servicio" Type="varchar" Mode="In" />
+    <Parameter Name="descripcion" Type="text" Mode="In" />
+    <Parameter Name="duracion" Type="varchar" Mode="In" />
+    <Parameter Name="imagen_servicio" Type="varchar" Mode="In" />
+    <Parameter Name="fecha_creacion" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="EditCar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="placa" Type="varchar" Mode="In" />
+    <Parameter Name="marca" Type="varchar" Mode="In" />
+    <Parameter Name="modelo" Type="varchar" Mode="In" />
+    <Parameter Name="anio" Type="varchar" Mode="In" />
+    <Parameter Name="motor" Type="varchar" Mode="In" />
+    <Parameter Name="VIN" Type="varchar" Mode="In" />
+    <Parameter Name="comentario" Type="text" Mode="In" />
+  </Function>
+  <Function Name="EliminarCarro" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="placa" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="EliminarCita" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id_cita" Type="int" Mode="In" />
+  </Function>
+  <Function Name="EliminarResena" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id_resena" Type="int" Mode="In" />
+  </Function>
+  <Function Name="EliminarRol" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id_rol" Type="int" Mode="In" />
+  </Function>
+  <Function Name="EliminarServicio" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id_servicio" Type="int" Mode="In" />
+  </Function>
+  <Function Name="EliminarUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id_usuario" Type="int" Mode="In" />
+  </Function>
+  <Function Name="IniciarSesion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="email" Type="varchar" Mode="In" />
+    <Parameter Name="contrasena" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="Login" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="cedula" Type="varchar" Mode="In" />
+    <Parameter Name="contrasena" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SeeStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="UsuarioXcedula" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="cedula" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="UsuarioXid" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id_usuario" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="VerActivos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="VerCaros" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="VerCarroPorPlaca" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="placa" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="VerCitas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="VerResenaPorId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id_resena" Type="int" Mode="In" />
+  </Function>
+  <Function Name="VerResenas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="VerRoles" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="VerRolPorId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id_rol" Type="int" Mode="In" />
+  </Function>
+  <Function Name="VerServicios" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="VerUsuarioPorId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id_usuario" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="VerUsuarios" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <EntityContainer Name="LubriXpressModelStoreContainer">
+    <EntitySet Name="Carros" EntityType="Self.Carros" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Citas" EntityType="Self.Citas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ErrorLog" EntityType="Self.ErrorLog" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Resenas" EntityType="Self.Resenas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Rol" EntityType="Self.Rol" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Servicios" EntityType="Self.Servicios" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Status" EntityType="Self.Status" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Citas__id_servic__3D5E1FD2" Association="Self.FK__Citas__id_servic__3D5E1FD2">
+      <End Role="Servicios" EntitySet="Servicios" />
+      <End Role="Citas" EntitySet="Citas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Usuarios_Rol" Association="Self.FK_Usuarios_Rol">
+      <End Role="Rol" EntitySet="Rol" />
+      <End Role="Usuarios" EntitySet="Usuarios" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Usuarios_Status" Association="Self.FK_Usuarios_Status">
+      <End Role="Status" EntitySet="Status" />
+      <End Role="Usuarios" EntitySet="Usuarios" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

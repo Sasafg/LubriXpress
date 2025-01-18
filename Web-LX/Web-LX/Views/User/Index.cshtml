@@ -1,0 +1,164 @@
+﻿@model IEnumerable<Web_LX.Entities.UserEnt>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout_Administration.cshtml";
+}
+
+<heah>
+
+    <link rel="stylesheet" href="~/assets/Administration/css/datatable/jquery.dataTables.min.css" />
+    <link rel="stylesheet" href="~/assets/Administration/css/datatable/buttons.dataTables.min.css" />
+    <link rel="stylesheet" href="~/assets/Administration/css/datatable/1.5.1_css_dataTables.dateTime.min.css" />
+
+    <script defer src="~/assets/Administration/js/DataTable/code.jquery.com_jquery-3.7.0.js"></script>
+    <script defer src="~/assets/Administration/js/DataTable/cdn.datatables.net_1.13.5_js_jquery.dataTables.min.js"></script>
+    <script defer src="~/assets/Administration/js/DataTable/cdn.datatables.net_buttons_2.4.1_js_dataTables.buttons.min.js"></script>
+    <script defer src="~/assets/Administration/js/DataTable/cdnjs.cloudflare.com_ajax_libs_jszip_3.10.1_jszip.min.js"></script>
+    <script defer src="~/assets/Administration/js/DataTable/cdnjs.cloudflare.com_ajax_libs_pdfmake_0.1.53_pdfmake.min.js"></script>
+    <script defer src="~/assets/Administration/js/DataTable/cdnjs.cloudflare.com_ajax_libs_pdfmake_0.1.53_vfs_fonts.js"></script>
+    <script defer src="~/assets/Administration/js/DataTable/cdn.datatables.net_buttons_2.4.1_js_buttons.html5.min.js"></script>
+    <script defer src="~/assets/Administration/js/DataTable/cdn.datatables.net_buttons_2.4.1_js_buttons.print.min.js"></script>
+    <script defer src="~/assets/Administration/js/DataTable/2.29.2_moment.min.js"></script>
+    <script defer src="~/assets/Administration/js/DataTable/1.5.1_js_dataTables.dateTime.min.js"></script>
+
+    <script defer src="~/assets/Administration/js/DataTable/DataTableUsers.js"></script>
+
+
+</heah>
+
+<main id="main" class="main">
+
+    <div class="pagetitle">
+        <h1>Lista de Usuarios</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a>Inicio</a></li>
+                <li class="breadcrumb-item">Usuarios</li>
+                <li class="breadcrumb-item active">Listado de Usuarios</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section">
+        
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                      
+
+                        @if (ViewBag.MsjPantallaPostivo != null)
+                        {
+                            <div id="mensajePositivo" style="text-align:center" class="alert alert-success" role="alert">
+                                @ViewBag.MsjPantallaPostivo
+                            </div>
+                        }
+                        @if (ViewBag.MsjPantallaNegativo != null)
+                        {
+                            <div id="mensajeNegativo" style="text-align:center" class="alert alert-danger" role="alert">
+                                @ViewBag.MsjPantallaNegativo
+                            </div>
+                        }
+                        <br />
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <a href="@Url.Action("Customer","Admin")" class="btn btn-sm text-white" style="background-color: #5f81e8;">Registrar Usuario</a>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="table-responsive">
+
+                                    <table id="DataTable" class="table table-hover text-center" width="100%">
+                                        <thead>
+                                            <tr>
+                                                <th style="text-align:center">Cedula</th>
+                                                <th style="text-align:center">Nombre</th>
+                                                <th style="text-align:center">Apellido</th>
+                                                <th style="text-align:center">Usuario</th>
+                                                <th style="text-align:center">UltimaActividad</th>
+                                                <th style="text-align:center">Rol</th>
+                                                <th style="text-align:center">Estatus</th>
+                                                <th style="text-align:center">Acciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in Model)
+                                            {
+                                                <tr>
+                                                    <td>@item.PersonalID</td>
+                                                    <td>@item.Name</td>
+                                                    <td>@item.LastName</td>
+                                                    <td>@item.UserName</td>
+
+                                                    @if (@item.LastActivity.ToString() == "1/1/1900 00:00:00")
+                                                    {
+                                                        <td>Nunca</td>
+                                                    }
+                                                    else
+                                                    {
+                                                        <td>@item.LastActivity.ToShortDateString()</td>
+                                                    }
+                                                    <td>@item.RolName</td>
+                                                    <td>@item.StatusName</td>
+                                                    <td style="text-align:center">
+                                                        <a type="submit" class="btn btn-sm text-white" style="background-color: #5f81e8;" href="@Url.Action("EditUser", "User", new { i = item.UserId })"><i class="bi bi-pencil-square"></i>Consultar</a>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+
+                                        <tfoot>
+                                            <tr>
+                                                <th style="text-align:center">Cedula</th>
+                                                <th style="text-align:center">Nombre</th>
+                                                <th style="text-align:center">Apellido</th>
+                                                <th style="text-align:center">Usuario</th>
+                                                <th style="text-align:center">UltimaActividad</th>
+                                                <th style="text-align:center">Rol</th>
+                                                <th style="text-align:center">Estatus</th>
+                                                <th style="text-align:center">Acciones</th>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-1">
+                            <button type="button" class="btn btn-secondary" onclick="window.history.back();">Regresar</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main><!-- End #main -->
+
+
+
+
+<script>
+
+
+    // Esperar 5 segundos y luego ocultar el mensaje
+    setTimeout(function () {
+        var mensajeDiv = document.getElementById('mensajePositivo');
+        if (mensajeDiv != null) {
+            mensajeDiv.style.display = 'none';
+        }
+
+        var mensajeDiv2 = document.getElementById('mensajeNegativo');
+        if (mensajeDiv2 != null) {
+            mensajeDiv2.style.display = 'none';
+        }
+
+        Session["MensajePositivo"] = 0;
+    }, 5000); // 5000 milisegundos = 5 segundos
+
+</script>

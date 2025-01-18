@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080" style="background-color: #f7f7f7;">
+    <rect width="1920" height="1080" fill="#f7f7f7" />
+    <defs>
+        <pattern id="pattern-lx" width="200" height="200" patternUnits="userSpaceOnUse">
+            <!-- Letra L con leve transparencia -->
+            <text x="5" y="30" font-family="'The Seasons', sans-serif" font-size="20" fill="rgba(0, 0, 0, 0.5)">L</text>
+            <!-- Letra X con leve transparencia -->
+            <text x="35" y="50" font-family="'The Seasons', sans-serif" font-size="20" fill="rgba(0, 0, 0, 0.5)">X</text>
+        </pattern>
+    </defs>
+    <!-- Fondo con patrón de letras -->
+    <rect width="1920" height="1080" fill="url(#pattern-lx)" />
+</svg>

@@ -1,0 +1,451 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="LubriXpressModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Carro">
+    <Key>
+      <PropertyRef Name="placa" />
+    </Key>
+    <Property Name="placa" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="marca" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="modelo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="anio" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="motor" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="VIN" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="comentario" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="fecha_creacion" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="Cita">
+    <Key>
+      <PropertyRef Name="id_cita" />
+    </Key>
+    <Property Name="id_cita" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_servicio" Type="Int32" />
+    <Property Name="nombre_cliente" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="apellidos_cliente" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="telefono_cliente" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="email_cliente" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="direccion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="fecha_estimada" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="marca_vehiculo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="modelo_vehiculo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="placa_vehiculo" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="anio_vehiculo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="estado_cita" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="fecha_creacion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Servicio" Relationship="Self.FK__Citas__id_servic__3D5E1FD2" FromRole="Citas" ToRole="Servicios" />
+  </EntityType>
+  <EntityType Name="ErrorLog">
+    <Key>
+      <PropertyRef Name="LogId" />
+    </Key>
+    <Property Name="LogId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DateAndTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Origin" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="UserId" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Resena">
+    <Key>
+      <PropertyRef Name="id_resena" />
+    </Key>
+    <Property Name="id_resena" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre_cliente" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="apellidos_cliente" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="telefono_cliente" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="email_cliente" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="calificacion" Type="Int32" />
+    <Property Name="comentario" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="fecha_creacion" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="Rol">
+    <Key>
+      <PropertyRef Name="id_rol" />
+    </Key>
+    <Property Name="id_rol" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre_rol" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="fecha_creacion" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Usuarios" Relationship="Self.FK_Usuarios_Rol" FromRole="Rol" ToRole="Usuarios" />
+  </EntityType>
+  <EntityType Name="Servicio">
+    <Key>
+      <PropertyRef Name="id_servicio" />
+    </Key>
+    <Property Name="id_servicio" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre_servicio" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="duracion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="imagen_servicio" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="fecha_creacion" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Citas" Relationship="Self.FK__Citas__id_servic__3D5E1FD2" FromRole="Servicios" ToRole="Citas" />
+  </EntityType>
+  <EntityType Name="Status">
+    <Key>
+      <PropertyRef Name="StatusId" />
+    </Key>
+    <Property Name="StatusId" Type="Int64" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Usuarios" Relationship="Self.FK_Usuarios_Status" FromRole="Status" ToRole="Usuarios" />
+  </EntityType>
+  <EntityType Name="Usuario">
+    <Key>
+      <PropertyRef Name="id_usuario" />
+    </Key>
+    <Property Name="id_usuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="cedula" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="fecha_nacimiento" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="contrasena" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="id_rol" Type="Int32" Nullable="false" />
+    <Property Name="fecha_creacion" Type="DateTime" Precision="3" />
+    <Property Name="StatusId" Type="Int64" />
+    <Property Name="lastactivity" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Rol" Relationship="Self.FK_Usuarios_Rol" FromRole="Usuarios" ToRole="Rol" />
+    <NavigationProperty Name="Status" Relationship="Self.FK_Usuarios_Status" FromRole="Usuarios" ToRole="Status" />
+  </EntityType>
+  <Association Name="FK__Citas__id_servic__3D5E1FD2">
+    <End Role="Servicios" Type="Self.Servicio" Multiplicity="0..1" />
+    <End Role="Citas" Type="Self.Cita" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Servicios">
+        <PropertyRef Name="id_servicio" />
+      </Principal>
+      <Dependent Role="Citas">
+        <PropertyRef Name="id_servicio" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Usuarios_Rol">
+    <End Role="Rol" Type="Self.Rol" Multiplicity="1" />
+    <End Role="Usuarios" Type="Self.Usuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Rol">
+        <PropertyRef Name="id_rol" />
+      </Principal>
+      <Dependent Role="Usuarios">
+        <PropertyRef Name="id_rol" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Usuarios_Status">
+    <End Role="Status" Type="Self.Status" Multiplicity="0..1" />
+    <End Role="Usuarios" Type="Self.Usuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Status">
+        <PropertyRef Name="StatusId" />
+      </Principal>
+      <Dependent Role="Usuarios">
+        <PropertyRef Name="StatusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="LubriXpressEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Carros" EntityType="Self.Carro" />
+    <EntitySet Name="Citas" EntityType="Self.Cita" />
+    <EntitySet Name="ErrorLogs" EntityType="Self.ErrorLog" />
+    <EntitySet Name="Resenas" EntityType="Self.Resena" />
+    <EntitySet Name="Rols" EntityType="Self.Rol" />
+    <EntitySet Name="Servicios" EntityType="Self.Servicio" />
+    <EntitySet Name="Status" EntityType="Self.Status" />
+    <EntitySet Name="Usuarios" EntityType="Self.Usuario" />
+    <AssociationSet Name="FK__Citas__id_servic__3D5E1FD2" Association="Self.FK__Citas__id_servic__3D5E1FD2">
+      <End Role="Servicios" EntitySet="Servicios" />
+      <End Role="Citas" EntitySet="Citas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Usuarios_Rol" Association="Self.FK_Usuarios_Rol">
+      <End Role="Rol" EntitySet="Rols" />
+      <End Role="Usuarios" EntitySet="Usuarios" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Usuarios_Status" Association="Self.FK_Usuarios_Status">
+      <End Role="Status" EntitySet="Status" />
+      <End Role="Usuarios" EntitySet="Usuarios" />
+    </AssociationSet>
+    <FunctionImport Name="ActualizarUsuario">
+      <Parameter Name="id_usuario" Mode="In" Type="Int32" />
+      <Parameter Name="nombre" Mode="In" Type="String" />
+      <Parameter Name="email" Mode="In" Type="String" />
+      <Parameter Name="contrasena" Mode="In" Type="String" />
+      <Parameter Name="id_rol" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="Crearcarro">
+      <Parameter Name="placa" Mode="In" Type="String" />
+      <Parameter Name="marca" Mode="In" Type="String" />
+      <Parameter Name="modelo" Mode="In" Type="String" />
+      <Parameter Name="anio" Mode="In" Type="String" />
+      <Parameter Name="motor" Mode="In" Type="String" />
+      <Parameter Name="VIN" Mode="In" Type="String" />
+      <Parameter Name="comentario" Mode="In" Type="String" />
+      <Parameter Name="fecha_creacion" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="CrearCita">
+      <Parameter Name="id_servicio" Mode="In" Type="Int32" />
+      <Parameter Name="nombre_cliente" Mode="In" Type="String" />
+      <Parameter Name="apellidos_cliente" Mode="In" Type="String" />
+      <Parameter Name="telefono_cliente" Mode="In" Type="String" />
+      <Parameter Name="email_cliente" Mode="In" Type="String" />
+      <Parameter Name="direccion" Mode="In" Type="String" />
+      <Parameter Name="fecha_estimada" Mode="In" Type="String" />
+      <Parameter Name="marca_vehiculo" Mode="In" Type="String" />
+      <Parameter Name="modelo_vehiculo" Mode="In" Type="String" />
+      <Parameter Name="placa_vehiculo" Mode="In" Type="String" />
+      <Parameter Name="anio_vehiculo" Mode="In" Type="String" />
+      <Parameter Name="estado_cita" Mode="In" Type="String" />
+      <Parameter Name="fecha_creacion" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="CrearResena">
+      <Parameter Name="nombre_cliente" Mode="In" Type="String" />
+      <Parameter Name="apellidos_cliente" Mode="In" Type="String" />
+      <Parameter Name="telefono_cliente" Mode="In" Type="String" />
+      <Parameter Name="email_cliente" Mode="In" Type="String" />
+      <Parameter Name="calificacion" Mode="In" Type="Int32" />
+      <Parameter Name="comentario" Mode="In" Type="String" />
+      <Parameter Name="fecha_creacion" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="CrearRol">
+      <Parameter Name="nombre_rol" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="CrearServicio">
+      <Parameter Name="nombre_servicio" Mode="In" Type="String" />
+      <Parameter Name="descripcion" Mode="In" Type="String" />
+      <Parameter Name="duracion" Mode="In" Type="String" />
+      <Parameter Name="imagen_servicio" Mode="In" Type="String" />
+      <Parameter Name="fecha_creacion" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="CrearUsuario">
+      <Parameter Name="nombre" Mode="In" Type="String" />
+      <Parameter Name="email" Mode="In" Type="String" />
+      <Parameter Name="contrasena" Mode="In" Type="String" />
+      <Parameter Name="id_rol" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="EditarCitas">
+      <Parameter Name="id_cita" Mode="In" Type="Int32" />
+      <Parameter Name="id_servicio" Mode="In" Type="Int32" />
+      <Parameter Name="nombre_cliente" Mode="In" Type="String" />
+      <Parameter Name="apellidos_cliente" Mode="In" Type="String" />
+      <Parameter Name="telefono_cliente" Mode="In" Type="String" />
+      <Parameter Name="email_cliente" Mode="In" Type="String" />
+      <Parameter Name="direccion" Mode="In" Type="String" />
+      <Parameter Name="fecha_estimada" Mode="In" Type="String" />
+      <Parameter Name="marca_vehiculo" Mode="In" Type="String" />
+      <Parameter Name="modelo_vehiculo" Mode="In" Type="String" />
+      <Parameter Name="placa_vehiculo" Mode="In" Type="String" />
+      <Parameter Name="anio_vehiculo" Mode="In" Type="String" />
+      <Parameter Name="estado_cita" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="EditarRol">
+      <Parameter Name="id_rol" Mode="In" Type="Int32" />
+      <Parameter Name="nombre_rol" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="EditarServicio">
+      <Parameter Name="id_servicio" Mode="In" Type="Int32" />
+      <Parameter Name="nombre_servicio" Mode="In" Type="String" />
+      <Parameter Name="descripcion" Mode="In" Type="String" />
+      <Parameter Name="duracion" Mode="In" Type="String" />
+      <Parameter Name="imagen_servicio" Mode="In" Type="String" />
+      <Parameter Name="fecha_creacion" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="EditCar">
+      <Parameter Name="placa" Mode="In" Type="String" />
+      <Parameter Name="marca" Mode="In" Type="String" />
+      <Parameter Name="modelo" Mode="In" Type="String" />
+      <Parameter Name="anio" Mode="In" Type="String" />
+      <Parameter Name="motor" Mode="In" Type="String" />
+      <Parameter Name="VIN" Mode="In" Type="String" />
+      <Parameter Name="comentario" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="EliminarCarro">
+      <Parameter Name="placa" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="EliminarCita">
+      <Parameter Name="id_cita" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="EliminarResena">
+      <Parameter Name="id_resena" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="EliminarRol">
+      <Parameter Name="id_rol" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="EliminarServicio">
+      <Parameter Name="id_servicio" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="EliminarUsuario">
+      <Parameter Name="id_usuario" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="IniciarSesion" ReturnType="Collection(LubriXpressModel.IniciarSesion_Result)">
+      <Parameter Name="email" Mode="In" Type="String" />
+      <Parameter Name="contrasena" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="Login" ReturnType="Collection(LubriXpressModel.Login_Result)">
+      <Parameter Name="cedula" Mode="In" Type="String" />
+      <Parameter Name="contrasena" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SeeStatus" ReturnType="Collection(LubriXpressModel.SeeStatus_Result)" />
+    <FunctionImport Name="UsuarioXcedula" ReturnType="Collection(LubriXpressModel.UsuarioXcedula_Result)">
+      <Parameter Name="cedula" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="UsuarioXid" ReturnType="Collection(LubriXpressModel.UsuarioXid_Result)">
+      <Parameter Name="id_usuario" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="VerActivos" ReturnType="Collection(LubriXpressModel.VerActivos_Result)" />
+    <FunctionImport Name="VerCaros" ReturnType="Collection(LubriXpressModel.VerCaros_Result)" />
+    <FunctionImport Name="VerCarroPorPlaca" ReturnType="Collection(LubriXpressModel.VerCarroPorPlaca_Result)">
+      <Parameter Name="placa" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="VerCitas" ReturnType="Collection(LubriXpressModel.VerCitas_Result)" />
+    <FunctionImport Name="VerResenaPorId" ReturnType="Collection(LubriXpressModel.VerResenaPorId_Result)">
+      <Parameter Name="id_resena" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="VerResenas" ReturnType="Collection(LubriXpressModel.VerResenas_Result)" />
+    <FunctionImport Name="VerRoles" ReturnType="Collection(LubriXpressModel.VerRoles_Result)" />
+    <FunctionImport Name="VerRolPorId" ReturnType="Collection(LubriXpressModel.VerRolPorId_Result)">
+      <Parameter Name="id_rol" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="VerServicios" ReturnType="Collection(LubriXpressModel.VerServicios_Result)" />
+    <FunctionImport Name="VerUsuarioPorId" ReturnType="Collection(LubriXpressModel.VerUsuarioPorId_Result)">
+      <Parameter Name="id_usuario" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="VerUsuarios" ReturnType="Collection(LubriXpressModel.VerUsuarios_Result)" />
+  </EntityContainer>
+  <ComplexType Name="IniciarSesion_Result">
+    <Property Type="String" Name="nombre" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="email" Nullable="false" MaxLength="100" />
+    <Property Type="Int32" Name="id_Rol" Nullable="false" />
+    <Property Type="String" Name="nombre_rol" Nullable="false" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="Login_Result">
+    <Property Type="Int32" Name="id_usuario" Nullable="false" />
+    <Property Type="String" Name="nombre" Nullable="false" MaxLength="100" />
+    <Property Type="Int64" Name="StatusId" Nullable="true" />
+    <Property Type="Int32" Name="id_rol" Nullable="false" />
+    <Property Type="String" Name="nombre_rol" Nullable="false" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="SeeStatus_Result">
+    <Property Type="Int64" Name="StatusId" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="true" MaxLength="20" />
+  </ComplexType>
+  <ComplexType Name="UsuarioXcedula_Result">
+    <Property Type="Int32" Name="id_usuario" Nullable="false" />
+    <Property Type="String" Name="cedula" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="fecha_nacimiento" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="nombre" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="email" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="contrasena" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="id_rol" Nullable="false" />
+    <Property Type="DateTime" Name="fecha_creacion" Nullable="true" Precision="23" />
+    <Property Type="Int64" Name="StatusId" Nullable="true" />
+    <Property Type="DateTime" Name="lastactivity" Nullable="true" Precision="23" />
+  </ComplexType>
+  <ComplexType Name="UsuarioXid_Result">
+    <Property Type="Int32" Name="id_usuario" Nullable="false" />
+    <Property Type="String" Name="cedula" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="fecha_nacimiento" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="nombre" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="email" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="contrasena" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="id_rol" Nullable="false" />
+    <Property Type="DateTime" Name="fecha_creacion" Nullable="true" Precision="23" />
+    <Property Type="Int64" Name="StatusId" Nullable="true" />
+    <Property Type="DateTime" Name="lastactivity" Nullable="true" Precision="23" />
+  </ComplexType>
+  <ComplexType Name="VerActivos_Result">
+    <Property Type="Int32" Name="id_usuario" Nullable="false" />
+    <Property Type="String" Name="cedula" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="fecha_nacimiento" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="nombre" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="email" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="contrasena" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="id_rol" Nullable="false" />
+    <Property Type="DateTime" Name="fecha_creacion" Nullable="true" Precision="23" />
+    <Property Type="Int64" Name="StatusId" Nullable="true" />
+    <Property Type="DateTime" Name="lastactivity" Nullable="true" Precision="23" />
+  </ComplexType>
+  <ComplexType Name="VerCaros_Result">
+    <Property Type="String" Name="placa" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="marca" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="modelo" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="anio" Nullable="false" MaxLength="10" />
+    <Property Type="String" Name="motor" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="VIN" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="comentario" Nullable="true" MaxLength="Max" />
+    <Property Type="DateTime" Name="fecha_creacion" Nullable="true" Precision="23" />
+  </ComplexType>
+  <ComplexType Name="VerCarroPorPlaca_Result">
+    <Property Type="String" Name="placa" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="marca" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="modelo" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="anio" Nullable="false" MaxLength="10" />
+    <Property Type="String" Name="motor" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="VIN" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="comentario" Nullable="true" MaxLength="Max" />
+    <Property Type="DateTime" Name="fecha_creacion" Nullable="true" Precision="23" />
+  </ComplexType>
+  <ComplexType Name="VerCitas_Result">
+    <Property Type="Int32" Name="id_cita" Nullable="false" />
+    <Property Type="String" Name="nombre_cliente" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="apellidos_cliente" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="telefono_cliente" Nullable="true" MaxLength="15" />
+    <Property Type="String" Name="email_cliente" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="direccion" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="servicio_solicitado" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="fecha_estimada" Nullable="false" MaxLength="10" />
+    <Property Type="String" Name="marca_vehiculo" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="modelo_vehiculo" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="placa_vehiculo" Nullable="false" MaxLength="15" />
+    <Property Type="String" Name="anio_vehiculo" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="estado_cita" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="fecha_creacion" Nullable="true" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="VerResenaPorId_Result">
+    <Property Type="Int32" Name="id_resena" Nullable="false" />
+    <Property Type="String" Name="nombre_cliente" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="apellidos_cliente" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="telefono_cliente" Nullable="false" MaxLength="15" />
+    <Property Type="String" Name="email_cliente" Nullable="false" MaxLength="100" />
+    <Property Type="Int32" Name="calificacion" Nullable="true" />
+    <Property Type="String" Name="comentario" Nullable="true" MaxLength="Max" />
+    <Property Type="DateTime" Name="fecha_creacion" Nullable="true" Precision="23" />
+  </ComplexType>
+  <ComplexType Name="VerResenas_Result">
+    <Property Type="Int32" Name="id_resena" Nullable="false" />
+    <Property Type="String" Name="nombre_cliente" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="apellidos_cliente" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="telefono_cliente" Nullable="false" MaxLength="15" />
+    <Property Type="String" Name="email_cliente" Nullable="false" MaxLength="100" />
+    <Property Type="Int32" Name="calificacion" Nullable="true" />
+    <Property Type="String" Name="comentario" Nullable="true" MaxLength="Max" />
+    <Property Type="DateTime" Name="fecha_creacion" Nullable="true" Precision="23" />
+  </ComplexType>
+  <ComplexType Name="VerRoles_Result">
+    <Property Type="Int32" Name="id_rol" Nullable="false" />
+    <Property Type="String" Name="nombre_rol" Nullable="false" MaxLength="50" />
+    <Property Type="DateTime" Name="fecha_creacion" Nullable="true" Precision="23" />
+  </ComplexType>
+  <ComplexType Name="VerRolPorId_Result">
+    <Property Type="Int32" Name="id_rol" Nullable="false" />
+    <Property Type="String" Name="nombre_rol" Nullable="false" MaxLength="50" />
+    <Property Type="DateTime" Name="fecha_creacion" Nullable="true" Precision="23" />
+  </ComplexType>
+  <ComplexType Name="VerServicios_Result">
+    <Property Type="Int32" Name="id_servicio" Nullable="false" />
+    <Property Type="String" Name="nombre_servicio" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="descripcion" Nullable="true" MaxLength="Max" />
+    <Property Type="String" Name="duracion" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="imagen_servicio" Nullable="true" MaxLength="255" />
+    <Property Type="DateTime" Name="fecha_creacion" Nullable="true" Precision="23" />
+  </ComplexType>
+  <ComplexType Name="VerUsuarioPorId_Result">
+    <Property Type="Int32" Name="id_usuario" Nullable="false" />
+    <Property Type="String" Name="nombre" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="email" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="nombre_rol" Nullable="false" MaxLength="50" />
+    <Property Type="DateTime" Name="fecha_creacion" Nullable="true" Precision="23" />
+  </ComplexType>
+  <ComplexType Name="VerUsuarios_Result">
+    <Property Type="Int32" Name="id_usuario" Nullable="false" />
+    <Property Type="String" Name="cedula" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="nombre" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="fecha_nacimiento" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="email" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="nombre_rol" Nullable="false" MaxLength="50" />
+    <Property Type="DateTime" Name="fecha_creacion" Nullable="true" Precision="23" />
+  </ComplexType>
+</Schema>

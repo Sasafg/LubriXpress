@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KN_API.App_Start;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
@@ -9,9 +10,10 @@ namespace API_LX
     {
         public static void Register(HttpConfiguration config)
         {
-            // Configuración y servicios de Web API
+            // Configuración y servicios de API web
+            config.MessageHandlers.Add(new TokenValidationHandler());
 
-            // Rutas de Web API
+            // Rutas de API web
             config.MapHttpAttributeRoutes();
 
             config.Routes.MapHttpRoute(
@@ -22,3 +24,5 @@ namespace API_LX
         }
     }
 }
+
+ 

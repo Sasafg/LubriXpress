@@ -1,0 +1,1126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="LubriXpressModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errores durante la generación:
+advertencia 6013: La tabla o vista 'LubriXpress.dbo.ActionLog' no tiene definida una clave principal y no es posible inferir ninguna clave principal válida. Esta tabla o vista se ha excluido. Para usar la entidad, necesitará revisar el esquema, agregar las claves correctas y quitar sus comentarios.
+        <EntityType Name="ActionLog">
+          <Property Name="LogId" Type="bigint" />
+          <Property Name="DateAndTime" Type="datetime" />
+          <Property Name="Message" Type="varchar" MaxLength="5000" />
+          <Property Name="Origin" Type="varchar" MaxLength="5000" />
+          <Property Name="UserId" Type="bigint" />
+        </EntityType>-->
+        <EntityType Name="Carros">
+          <Key>
+            <PropertyRef Name="placa" />
+          </Key>
+          <Property Name="placa" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="marca" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="modelo" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="anio" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="motor" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="VIN" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="comentario" Type="text" />
+          <Property Name="fecha_creacion" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Citas">
+          <Key>
+            <PropertyRef Name="id_cita" />
+          </Key>
+          <Property Name="id_cita" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_servicio" Type="int" />
+          <Property Name="nombre_cliente" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="apellidos_cliente" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="telefono_cliente" Type="varchar" MaxLength="15" />
+          <Property Name="email_cliente" Type="varchar" MaxLength="100" />
+          <Property Name="direccion" Type="varchar" MaxLength="100" />
+          <Property Name="fecha_estimada" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="marca_vehiculo" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="modelo_vehiculo" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="placa_vehiculo" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="anio_vehiculo" Type="varchar" MaxLength="10" />
+          <Property Name="estado_cita" Type="varchar" MaxLength="10" />
+          <Property Name="fecha_creacion" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="ErrorLog">
+          <Key>
+            <PropertyRef Name="LogId" />
+          </Key>
+          <Property Name="LogId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DateAndTime" Type="datetime" Nullable="false" />
+          <Property Name="Message" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Origin" Type="nvarchar" MaxLength="255" />
+          <Property Name="UserId" Type="int" />
+        </EntityType>
+        <EntityType Name="Resenas">
+          <Key>
+            <PropertyRef Name="id_resena" />
+          </Key>
+          <Property Name="id_resena" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre_cliente" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="apellidos_cliente" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="telefono_cliente" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="email_cliente" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="calificacion" Type="int" />
+          <Property Name="comentario" Type="text" />
+          <Property Name="fecha_creacion" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Rol">
+          <Key>
+            <PropertyRef Name="id_rol" />
+          </Key>
+          <Property Name="id_rol" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre_rol" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="fecha_creacion" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Servicios">
+          <Key>
+            <PropertyRef Name="id_servicio" />
+          </Key>
+          <Property Name="id_servicio" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre_servicio" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="descripcion" Type="text" />
+          <Property Name="duracion" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="imagen_servicio" Type="varchar" MaxLength="255" />
+          <Property Name="fecha_creacion" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="StatusId" />
+          </Key>
+          <Property Name="StatusId" Type="bigint" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="id_usuario" />
+          </Key>
+          <Property Name="id_usuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cedula" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="fecha_nacimiento" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="contrasena" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="id_rol" Type="int" Nullable="false" />
+          <Property Name="fecha_creacion" Type="datetime" />
+          <Property Name="StatusId" Type="bigint" />
+          <Property Name="lastactivity" Type="datetime" />
+        </EntityType>
+        <Association Name="FK__Citas__id_servic__3D5E1FD2">
+          <End Role="Servicios" Type="Self.Servicios" Multiplicity="0..1" />
+          <End Role="Citas" Type="Self.Citas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Servicios">
+              <PropertyRef Name="id_servicio" />
+            </Principal>
+            <Dependent Role="Citas">
+              <PropertyRef Name="id_servicio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuarios_Rol">
+          <End Role="Rol" Type="Self.Rol" Multiplicity="1" />
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rol">
+              <PropertyRef Name="id_rol" />
+            </Principal>
+            <Dependent Role="Usuarios">
+              <PropertyRef Name="id_rol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuarios_Status">
+          <End Role="Status" Type="Self.Status" Multiplicity="0..1" />
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="StatusId" />
+            </Principal>
+            <Dependent Role="Usuarios">
+              <PropertyRef Name="StatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="ActualizarUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_usuario" Type="int" Mode="In" />
+          <Parameter Name="nombre" Type="varchar" Mode="In" />
+          <Parameter Name="email" Type="varchar" Mode="In" />
+          <Parameter Name="contrasena" Type="varchar" Mode="In" />
+          <Parameter Name="id_rol" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Crearcarro" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="placa" Type="varchar" Mode="In" />
+          <Parameter Name="marca" Type="varchar" Mode="In" />
+          <Parameter Name="modelo" Type="varchar" Mode="In" />
+          <Parameter Name="anio" Type="varchar" Mode="In" />
+          <Parameter Name="motor" Type="varchar" Mode="In" />
+          <Parameter Name="VIN" Type="varchar" Mode="In" />
+          <Parameter Name="comentario" Type="text" Mode="In" />
+          <Parameter Name="fecha_creacion" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="CrearCita" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_servicio" Type="int" Mode="In" />
+          <Parameter Name="nombre_cliente" Type="varchar" Mode="In" />
+          <Parameter Name="apellidos_cliente" Type="varchar" Mode="In" />
+          <Parameter Name="telefono_cliente" Type="varchar" Mode="In" />
+          <Parameter Name="email_cliente" Type="varchar" Mode="In" />
+          <Parameter Name="direccion" Type="varchar" Mode="In" />
+          <Parameter Name="fecha_estimada" Type="varchar" Mode="In" />
+          <Parameter Name="marca_vehiculo" Type="varchar" Mode="In" />
+          <Parameter Name="modelo_vehiculo" Type="varchar" Mode="In" />
+          <Parameter Name="placa_vehiculo" Type="varchar" Mode="In" />
+          <Parameter Name="anio_vehiculo" Type="varchar" Mode="In" />
+          <Parameter Name="estado_cita" Type="varchar" Mode="In" />
+          <Parameter Name="fecha_creacion" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="CrearResena" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="nombre_cliente" Type="varchar" Mode="In" />
+          <Parameter Name="apellidos_cliente" Type="varchar" Mode="In" />
+          <Parameter Name="telefono_cliente" Type="varchar" Mode="In" />
+          <Parameter Name="email_cliente" Type="varchar" Mode="In" />
+          <Parameter Name="calificacion" Type="int" Mode="In" />
+          <Parameter Name="comentario" Type="text" Mode="In" />
+          <Parameter Name="fecha_creacion" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="CrearRol" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="nombre_rol" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="CrearServicio" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="nombre_servicio" Type="varchar" Mode="In" />
+          <Parameter Name="descripcion" Type="text" Mode="In" />
+          <Parameter Name="duracion" Type="varchar" Mode="In" />
+          <Parameter Name="imagen_servicio" Type="varchar" Mode="In" />
+          <Parameter Name="fecha_creacion" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="CrearUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="nombre" Type="varchar" Mode="In" />
+          <Parameter Name="email" Type="varchar" Mode="In" />
+          <Parameter Name="contrasena" Type="varchar" Mode="In" />
+          <Parameter Name="id_rol" Type="int" Mode="In" />
+        </Function>
+        <Function Name="EditarCitas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_cita" Type="int" Mode="In" />
+          <Parameter Name="id_servicio" Type="int" Mode="In" />
+          <Parameter Name="nombre_cliente" Type="varchar" Mode="In" />
+          <Parameter Name="apellidos_cliente" Type="varchar" Mode="In" />
+          <Parameter Name="telefono_cliente" Type="varchar" Mode="In" />
+          <Parameter Name="email_cliente" Type="varchar" Mode="In" />
+          <Parameter Name="direccion" Type="varchar" Mode="In" />
+          <Parameter Name="fecha_estimada" Type="varchar" Mode="In" />
+          <Parameter Name="marca_vehiculo" Type="varchar" Mode="In" />
+          <Parameter Name="modelo_vehiculo" Type="varchar" Mode="In" />
+          <Parameter Name="placa_vehiculo" Type="varchar" Mode="In" />
+          <Parameter Name="anio_vehiculo" Type="varchar" Mode="In" />
+          <Parameter Name="estado_cita" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="EditarRol" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_rol" Type="int" Mode="In" />
+          <Parameter Name="nombre_rol" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="EditarServicio" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_servicio" Type="int" Mode="In" />
+          <Parameter Name="nombre_servicio" Type="varchar" Mode="In" />
+          <Parameter Name="descripcion" Type="text" Mode="In" />
+          <Parameter Name="duracion" Type="varchar" Mode="In" />
+          <Parameter Name="imagen_servicio" Type="varchar" Mode="In" />
+          <Parameter Name="fecha_creacion" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="EditCar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="placa" Type="varchar" Mode="In" />
+          <Parameter Name="marca" Type="varchar" Mode="In" />
+          <Parameter Name="modelo" Type="varchar" Mode="In" />
+          <Parameter Name="anio" Type="varchar" Mode="In" />
+          <Parameter Name="motor" Type="varchar" Mode="In" />
+          <Parameter Name="VIN" Type="varchar" Mode="In" />
+          <Parameter Name="comentario" Type="text" Mode="In" />
+        </Function>
+        <Function Name="EliminarCarro" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="placa" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="EliminarCita" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_cita" Type="int" Mode="In" />
+        </Function>
+        <Function Name="EliminarResena" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_resena" Type="int" Mode="In" />
+        </Function>
+        <Function Name="EliminarRol" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_rol" Type="int" Mode="In" />
+        </Function>
+        <Function Name="EliminarServicio" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_servicio" Type="int" Mode="In" />
+        </Function>
+        <Function Name="EliminarUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_usuario" Type="int" Mode="In" />
+        </Function>
+        <Function Name="IniciarSesion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="email" Type="varchar" Mode="In" />
+          <Parameter Name="contrasena" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="Login" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="cedula" Type="varchar" Mode="In" />
+          <Parameter Name="contrasena" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SeeStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="UsuarioXcedula" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="cedula" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="UsuarioXid" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_usuario" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="VerActivos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="VerCaros" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="VerCarroPorPlaca" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="placa" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="VerCitas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="VerResenaPorId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_resena" Type="int" Mode="In" />
+        </Function>
+        <Function Name="VerResenas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="VerRoles" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="VerRolPorId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_rol" Type="int" Mode="In" />
+        </Function>
+        <Function Name="VerServicios" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="VerUsuarioPorId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_usuario" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="VerUsuarios" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="LubriXpressModelStoreContainer">
+          <EntitySet Name="Carros" EntityType="Self.Carros" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Citas" EntityType="Self.Citas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ErrorLog" EntityType="Self.ErrorLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Resenas" EntityType="Self.Resenas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rol" EntityType="Self.Rol" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Servicios" EntityType="Self.Servicios" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Status" EntityType="Self.Status" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Citas__id_servic__3D5E1FD2" Association="Self.FK__Citas__id_servic__3D5E1FD2">
+            <End Role="Servicios" EntitySet="Servicios" />
+            <End Role="Citas" EntitySet="Citas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuarios_Rol" Association="Self.FK_Usuarios_Rol">
+            <End Role="Rol" EntitySet="Rol" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuarios_Status" Association="Self.FK_Usuarios_Status">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="LubriXpressModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Carro">
+          <Key>
+            <PropertyRef Name="placa" />
+          </Key>
+          <Property Name="placa" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="marca" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="modelo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="anio" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="motor" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="VIN" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="comentario" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="fecha_creacion" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Cita">
+          <Key>
+            <PropertyRef Name="id_cita" />
+          </Key>
+          <Property Name="id_cita" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_servicio" Type="Int32" />
+          <Property Name="nombre_cliente" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="apellidos_cliente" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="telefono_cliente" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="email_cliente" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="direccion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="fecha_estimada" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="marca_vehiculo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="modelo_vehiculo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="placa_vehiculo" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="anio_vehiculo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="estado_cita" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="fecha_creacion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Servicio" Relationship="Self.FK__Citas__id_servic__3D5E1FD2" FromRole="Citas" ToRole="Servicios" />
+        </EntityType>
+        <EntityType Name="ErrorLog">
+          <Key>
+            <PropertyRef Name="LogId" />
+          </Key>
+          <Property Name="LogId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DateAndTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Origin" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Resena">
+          <Key>
+            <PropertyRef Name="id_resena" />
+          </Key>
+          <Property Name="id_resena" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre_cliente" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="apellidos_cliente" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="telefono_cliente" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="email_cliente" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="calificacion" Type="Int32" />
+          <Property Name="comentario" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="fecha_creacion" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Rol">
+          <Key>
+            <PropertyRef Name="id_rol" />
+          </Key>
+          <Property Name="id_rol" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre_rol" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="fecha_creacion" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.FK_Usuarios_Rol" FromRole="Rol" ToRole="Usuarios" />
+        </EntityType>
+        <EntityType Name="Servicio">
+          <Key>
+            <PropertyRef Name="id_servicio" />
+          </Key>
+          <Property Name="id_servicio" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre_servicio" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="duracion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="imagen_servicio" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="fecha_creacion" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Citas" Relationship="Self.FK__Citas__id_servic__3D5E1FD2" FromRole="Servicios" ToRole="Citas" />
+        </EntityType>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="StatusId" />
+          </Key>
+          <Property Name="StatusId" Type="Int64" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.FK_Usuarios_Status" FromRole="Status" ToRole="Usuarios" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="id_usuario" />
+          </Key>
+          <Property Name="id_usuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cedula" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="fecha_nacimiento" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="contrasena" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="id_rol" Type="Int32" Nullable="false" />
+          <Property Name="fecha_creacion" Type="DateTime" Precision="3" />
+          <Property Name="StatusId" Type="Int64" />
+          <Property Name="lastactivity" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Rol" Relationship="Self.FK_Usuarios_Rol" FromRole="Usuarios" ToRole="Rol" />
+          <NavigationProperty Name="Status" Relationship="Self.FK_Usuarios_Status" FromRole="Usuarios" ToRole="Status" />
+        </EntityType>
+        <Association Name="FK__Citas__id_servic__3D5E1FD2">
+          <End Role="Servicios" Type="Self.Servicio" Multiplicity="0..1" />
+          <End Role="Citas" Type="Self.Cita" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Servicios">
+              <PropertyRef Name="id_servicio" />
+            </Principal>
+            <Dependent Role="Citas">
+              <PropertyRef Name="id_servicio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuarios_Rol">
+          <End Role="Rol" Type="Self.Rol" Multiplicity="1" />
+          <End Role="Usuarios" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rol">
+              <PropertyRef Name="id_rol" />
+            </Principal>
+            <Dependent Role="Usuarios">
+              <PropertyRef Name="id_rol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuarios_Status">
+          <End Role="Status" Type="Self.Status" Multiplicity="0..1" />
+          <End Role="Usuarios" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="StatusId" />
+            </Principal>
+            <Dependent Role="Usuarios">
+              <PropertyRef Name="StatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="LubriXpressEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Carros" EntityType="Self.Carro" />
+          <EntitySet Name="Citas" EntityType="Self.Cita" />
+          <EntitySet Name="ErrorLogs" EntityType="Self.ErrorLog" />
+          <EntitySet Name="Resenas" EntityType="Self.Resena" />
+          <EntitySet Name="Rols" EntityType="Self.Rol" />
+          <EntitySet Name="Servicios" EntityType="Self.Servicio" />
+          <EntitySet Name="Status" EntityType="Self.Status" />
+          <EntitySet Name="Usuarios" EntityType="Self.Usuario" />
+          <AssociationSet Name="FK__Citas__id_servic__3D5E1FD2" Association="Self.FK__Citas__id_servic__3D5E1FD2">
+            <End Role="Servicios" EntitySet="Servicios" />
+            <End Role="Citas" EntitySet="Citas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuarios_Rol" Association="Self.FK_Usuarios_Rol">
+            <End Role="Rol" EntitySet="Rols" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuarios_Status" Association="Self.FK_Usuarios_Status">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
+          <FunctionImport Name="ActualizarUsuario">
+            <Parameter Name="id_usuario" Mode="In" Type="Int32" />
+            <Parameter Name="nombre" Mode="In" Type="String" />
+            <Parameter Name="email" Mode="In" Type="String" />
+            <Parameter Name="contrasena" Mode="In" Type="String" />
+            <Parameter Name="id_rol" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Crearcarro">
+            <Parameter Name="placa" Mode="In" Type="String" />
+            <Parameter Name="marca" Mode="In" Type="String" />
+            <Parameter Name="modelo" Mode="In" Type="String" />
+            <Parameter Name="anio" Mode="In" Type="String" />
+            <Parameter Name="motor" Mode="In" Type="String" />
+            <Parameter Name="VIN" Mode="In" Type="String" />
+            <Parameter Name="comentario" Mode="In" Type="String" />
+            <Parameter Name="fecha_creacion" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="CrearCita">
+            <Parameter Name="id_servicio" Mode="In" Type="Int32" />
+            <Parameter Name="nombre_cliente" Mode="In" Type="String" />
+            <Parameter Name="apellidos_cliente" Mode="In" Type="String" />
+            <Parameter Name="telefono_cliente" Mode="In" Type="String" />
+            <Parameter Name="email_cliente" Mode="In" Type="String" />
+            <Parameter Name="direccion" Mode="In" Type="String" />
+            <Parameter Name="fecha_estimada" Mode="In" Type="String" />
+            <Parameter Name="marca_vehiculo" Mode="In" Type="String" />
+            <Parameter Name="modelo_vehiculo" Mode="In" Type="String" />
+            <Parameter Name="placa_vehiculo" Mode="In" Type="String" />
+            <Parameter Name="anio_vehiculo" Mode="In" Type="String" />
+            <Parameter Name="estado_cita" Mode="In" Type="String" />
+            <Parameter Name="fecha_creacion" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="CrearResena">
+            <Parameter Name="nombre_cliente" Mode="In" Type="String" />
+            <Parameter Name="apellidos_cliente" Mode="In" Type="String" />
+            <Parameter Name="telefono_cliente" Mode="In" Type="String" />
+            <Parameter Name="email_cliente" Mode="In" Type="String" />
+            <Parameter Name="calificacion" Mode="In" Type="Int32" />
+            <Parameter Name="comentario" Mode="In" Type="String" />
+            <Parameter Name="fecha_creacion" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="CrearRol">
+            <Parameter Name="nombre_rol" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="CrearServicio">
+            <Parameter Name="nombre_servicio" Mode="In" Type="String" />
+            <Parameter Name="descripcion" Mode="In" Type="String" />
+            <Parameter Name="duracion" Mode="In" Type="String" />
+            <Parameter Name="imagen_servicio" Mode="In" Type="String" />
+            <Parameter Name="fecha_creacion" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="CrearUsuario">
+            <Parameter Name="nombre" Mode="In" Type="String" />
+            <Parameter Name="email" Mode="In" Type="String" />
+            <Parameter Name="contrasena" Mode="In" Type="String" />
+            <Parameter Name="id_rol" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="EditarCitas">
+            <Parameter Name="id_cita" Mode="In" Type="Int32" />
+            <Parameter Name="id_servicio" Mode="In" Type="Int32" />
+            <Parameter Name="nombre_cliente" Mode="In" Type="String" />
+            <Parameter Name="apellidos_cliente" Mode="In" Type="String" />
+            <Parameter Name="telefono_cliente" Mode="In" Type="String" />
+            <Parameter Name="email_cliente" Mode="In" Type="String" />
+            <Parameter Name="direccion" Mode="In" Type="String" />
+            <Parameter Name="fecha_estimada" Mode="In" Type="String" />
+            <Parameter Name="marca_vehiculo" Mode="In" Type="String" />
+            <Parameter Name="modelo_vehiculo" Mode="In" Type="String" />
+            <Parameter Name="placa_vehiculo" Mode="In" Type="String" />
+            <Parameter Name="anio_vehiculo" Mode="In" Type="String" />
+            <Parameter Name="estado_cita" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="EditarRol">
+            <Parameter Name="id_rol" Mode="In" Type="Int32" />
+            <Parameter Name="nombre_rol" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="EditarServicio">
+            <Parameter Name="id_servicio" Mode="In" Type="Int32" />
+            <Parameter Name="nombre_servicio" Mode="In" Type="String" />
+            <Parameter Name="descripcion" Mode="In" Type="String" />
+            <Parameter Name="duracion" Mode="In" Type="String" />
+            <Parameter Name="imagen_servicio" Mode="In" Type="String" />
+            <Parameter Name="fecha_creacion" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="EditCar">
+            <Parameter Name="placa" Mode="In" Type="String" />
+            <Parameter Name="marca" Mode="In" Type="String" />
+            <Parameter Name="modelo" Mode="In" Type="String" />
+            <Parameter Name="anio" Mode="In" Type="String" />
+            <Parameter Name="motor" Mode="In" Type="String" />
+            <Parameter Name="VIN" Mode="In" Type="String" />
+            <Parameter Name="comentario" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="EliminarCarro">
+            <Parameter Name="placa" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="EliminarCita">
+            <Parameter Name="id_cita" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="EliminarResena">
+            <Parameter Name="id_resena" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="EliminarRol">
+            <Parameter Name="id_rol" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="EliminarServicio">
+            <Parameter Name="id_servicio" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="EliminarUsuario">
+            <Parameter Name="id_usuario" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="IniciarSesion" ReturnType="Collection(LubriXpressModel.IniciarSesion_Result)">
+            <Parameter Name="email" Mode="In" Type="String" />
+            <Parameter Name="contrasena" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Login" ReturnType="Collection(LubriXpressModel.Login_Result)">
+            <Parameter Name="cedula" Mode="In" Type="String" />
+            <Parameter Name="contrasena" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SeeStatus" ReturnType="Collection(LubriXpressModel.SeeStatus_Result)" />
+          <FunctionImport Name="UsuarioXcedula" ReturnType="Collection(LubriXpressModel.UsuarioXcedula_Result)">
+            <Parameter Name="cedula" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="UsuarioXid" ReturnType="Collection(LubriXpressModel.UsuarioXid_Result)">
+            <Parameter Name="id_usuario" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="VerActivos" ReturnType="Collection(LubriXpressModel.VerActivos_Result)" />
+          <FunctionImport Name="VerCaros" ReturnType="Collection(LubriXpressModel.VerCaros_Result)" />
+          <FunctionImport Name="VerCarroPorPlaca" ReturnType="Collection(LubriXpressModel.VerCarroPorPlaca_Result)">
+            <Parameter Name="placa" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="VerCitas" ReturnType="Collection(LubriXpressModel.VerCitas_Result)" />
+          <FunctionImport Name="VerResenaPorId" ReturnType="Collection(LubriXpressModel.VerResenaPorId_Result)">
+            <Parameter Name="id_resena" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="VerResenas" ReturnType="Collection(LubriXpressModel.VerResenas_Result)" />
+          <FunctionImport Name="VerRoles" ReturnType="Collection(LubriXpressModel.VerRoles_Result)" />
+          <FunctionImport Name="VerRolPorId" ReturnType="Collection(LubriXpressModel.VerRolPorId_Result)">
+            <Parameter Name="id_rol" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="VerServicios" ReturnType="Collection(LubriXpressModel.VerServicios_Result)" />
+          <FunctionImport Name="VerUsuarioPorId" ReturnType="Collection(LubriXpressModel.VerUsuarioPorId_Result)">
+            <Parameter Name="id_usuario" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="VerUsuarios" ReturnType="Collection(LubriXpressModel.VerUsuarios_Result)" />
+        </EntityContainer>
+        <ComplexType Name="IniciarSesion_Result">
+          <Property Type="String" Name="nombre" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="email" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="id_Rol" Nullable="false" />
+          <Property Type="String" Name="nombre_rol" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="Login_Result">
+          <Property Type="Int32" Name="id_usuario" Nullable="false" />
+          <Property Type="String" Name="nombre" Nullable="false" MaxLength="100" />
+          <Property Type="Int64" Name="StatusId" Nullable="true" />
+          <Property Type="Int32" Name="id_rol" Nullable="false" />
+          <Property Type="String" Name="nombre_rol" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="SeeStatus_Result">
+          <Property Type="Int64" Name="StatusId" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="20" />
+        </ComplexType>
+        <ComplexType Name="UsuarioXcedula_Result">
+          <Property Type="Int32" Name="id_usuario" Nullable="false" />
+          <Property Type="String" Name="cedula" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="fecha_nacimiento" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="nombre" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="email" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="contrasena" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="id_rol" Nullable="false" />
+          <Property Type="DateTime" Name="fecha_creacion" Nullable="true" Precision="23" />
+          <Property Type="Int64" Name="StatusId" Nullable="true" />
+          <Property Type="DateTime" Name="lastactivity" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="UsuarioXid_Result">
+          <Property Type="Int32" Name="id_usuario" Nullable="false" />
+          <Property Type="String" Name="cedula" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="fecha_nacimiento" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="nombre" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="email" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="contrasena" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="id_rol" Nullable="false" />
+          <Property Type="DateTime" Name="fecha_creacion" Nullable="true" Precision="23" />
+          <Property Type="Int64" Name="StatusId" Nullable="true" />
+          <Property Type="DateTime" Name="lastactivity" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="VerActivos_Result">
+          <Property Type="Int32" Name="id_usuario" Nullable="false" />
+          <Property Type="String" Name="cedula" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="fecha_nacimiento" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="nombre" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="email" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="contrasena" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="id_rol" Nullable="false" />
+          <Property Type="DateTime" Name="fecha_creacion" Nullable="true" Precision="23" />
+          <Property Type="Int64" Name="StatusId" Nullable="true" />
+          <Property Type="DateTime" Name="lastactivity" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="VerCaros_Result">
+          <Property Type="String" Name="placa" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="marca" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="modelo" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="anio" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="motor" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="VIN" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="comentario" Nullable="true" MaxLength="Max" />
+          <Property Type="DateTime" Name="fecha_creacion" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="VerCarroPorPlaca_Result">
+          <Property Type="String" Name="placa" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="marca" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="modelo" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="anio" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="motor" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="VIN" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="comentario" Nullable="true" MaxLength="Max" />
+          <Property Type="DateTime" Name="fecha_creacion" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="VerCitas_Result">
+          <Property Type="Int32" Name="id_cita" Nullable="false" />
+          <Property Type="String" Name="nombre_cliente" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="apellidos_cliente" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="telefono_cliente" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="email_cliente" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="direccion" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="servicio_solicitado" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="fecha_estimada" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="marca_vehiculo" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="modelo_vehiculo" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="placa_vehiculo" Nullable="false" MaxLength="15" />
+          <Property Type="String" Name="anio_vehiculo" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="estado_cita" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="fecha_creacion" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="VerResenaPorId_Result">
+          <Property Type="Int32" Name="id_resena" Nullable="false" />
+          <Property Type="String" Name="nombre_cliente" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="apellidos_cliente" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="telefono_cliente" Nullable="false" MaxLength="15" />
+          <Property Type="String" Name="email_cliente" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="calificacion" Nullable="true" />
+          <Property Type="String" Name="comentario" Nullable="true" MaxLength="Max" />
+          <Property Type="DateTime" Name="fecha_creacion" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="VerResenas_Result">
+          <Property Type="Int32" Name="id_resena" Nullable="false" />
+          <Property Type="String" Name="nombre_cliente" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="apellidos_cliente" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="telefono_cliente" Nullable="false" MaxLength="15" />
+          <Property Type="String" Name="email_cliente" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="calificacion" Nullable="true" />
+          <Property Type="String" Name="comentario" Nullable="true" MaxLength="Max" />
+          <Property Type="DateTime" Name="fecha_creacion" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="VerRoles_Result">
+          <Property Type="Int32" Name="id_rol" Nullable="false" />
+          <Property Type="String" Name="nombre_rol" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="fecha_creacion" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="VerRolPorId_Result">
+          <Property Type="Int32" Name="id_rol" Nullable="false" />
+          <Property Type="String" Name="nombre_rol" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="fecha_creacion" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="VerServicios_Result">
+          <Property Type="Int32" Name="id_servicio" Nullable="false" />
+          <Property Type="String" Name="nombre_servicio" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="descripcion" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="duracion" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="imagen_servicio" Nullable="true" MaxLength="255" />
+          <Property Type="DateTime" Name="fecha_creacion" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="VerUsuarioPorId_Result">
+          <Property Type="Int32" Name="id_usuario" Nullable="false" />
+          <Property Type="String" Name="nombre" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="email" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="nombre_rol" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="fecha_creacion" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="VerUsuarios_Result">
+          <Property Type="Int32" Name="id_usuario" Nullable="false" />
+          <Property Type="String" Name="cedula" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="nombre" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="fecha_nacimiento" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="email" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="nombre_rol" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="fecha_creacion" Nullable="true" Precision="23" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="LubriXpressModelStoreContainer" CdmEntityContainer="LubriXpressEntities">
+          <EntitySetMapping Name="Carros">
+            <EntityTypeMapping TypeName="LubriXpressModel.Carro">
+              <MappingFragment StoreEntitySet="Carros">
+                <ScalarProperty Name="placa" ColumnName="placa" />
+                <ScalarProperty Name="marca" ColumnName="marca" />
+                <ScalarProperty Name="modelo" ColumnName="modelo" />
+                <ScalarProperty Name="anio" ColumnName="anio" />
+                <ScalarProperty Name="motor" ColumnName="motor" />
+                <ScalarProperty Name="VIN" ColumnName="VIN" />
+                <ScalarProperty Name="comentario" ColumnName="comentario" />
+                <ScalarProperty Name="fecha_creacion" ColumnName="fecha_creacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Citas">
+            <EntityTypeMapping TypeName="LubriXpressModel.Cita">
+              <MappingFragment StoreEntitySet="Citas">
+                <ScalarProperty Name="id_cita" ColumnName="id_cita" />
+                <ScalarProperty Name="id_servicio" ColumnName="id_servicio" />
+                <ScalarProperty Name="nombre_cliente" ColumnName="nombre_cliente" />
+                <ScalarProperty Name="apellidos_cliente" ColumnName="apellidos_cliente" />
+                <ScalarProperty Name="telefono_cliente" ColumnName="telefono_cliente" />
+                <ScalarProperty Name="email_cliente" ColumnName="email_cliente" />
+                <ScalarProperty Name="direccion" ColumnName="direccion" />
+                <ScalarProperty Name="fecha_estimada" ColumnName="fecha_estimada" />
+                <ScalarProperty Name="marca_vehiculo" ColumnName="marca_vehiculo" />
+                <ScalarProperty Name="modelo_vehiculo" ColumnName="modelo_vehiculo" />
+                <ScalarProperty Name="placa_vehiculo" ColumnName="placa_vehiculo" />
+                <ScalarProperty Name="anio_vehiculo" ColumnName="anio_vehiculo" />
+                <ScalarProperty Name="estado_cita" ColumnName="estado_cita" />
+                <ScalarProperty Name="fecha_creacion" ColumnName="fecha_creacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ErrorLogs">
+            <EntityTypeMapping TypeName="LubriXpressModel.ErrorLog">
+              <MappingFragment StoreEntitySet="ErrorLog">
+                <ScalarProperty Name="LogId" ColumnName="LogId" />
+                <ScalarProperty Name="DateAndTime" ColumnName="DateAndTime" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="Origin" ColumnName="Origin" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Resenas">
+            <EntityTypeMapping TypeName="LubriXpressModel.Resena">
+              <MappingFragment StoreEntitySet="Resenas">
+                <ScalarProperty Name="id_resena" ColumnName="id_resena" />
+                <ScalarProperty Name="nombre_cliente" ColumnName="nombre_cliente" />
+                <ScalarProperty Name="apellidos_cliente" ColumnName="apellidos_cliente" />
+                <ScalarProperty Name="telefono_cliente" ColumnName="telefono_cliente" />
+                <ScalarProperty Name="email_cliente" ColumnName="email_cliente" />
+                <ScalarProperty Name="calificacion" ColumnName="calificacion" />
+                <ScalarProperty Name="comentario" ColumnName="comentario" />
+                <ScalarProperty Name="fecha_creacion" ColumnName="fecha_creacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rols">
+            <EntityTypeMapping TypeName="LubriXpressModel.Rol">
+              <MappingFragment StoreEntitySet="Rol">
+                <ScalarProperty Name="id_rol" ColumnName="id_rol" />
+                <ScalarProperty Name="nombre_rol" ColumnName="nombre_rol" />
+                <ScalarProperty Name="fecha_creacion" ColumnName="fecha_creacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Servicios">
+            <EntityTypeMapping TypeName="LubriXpressModel.Servicio">
+              <MappingFragment StoreEntitySet="Servicios">
+                <ScalarProperty Name="id_servicio" ColumnName="id_servicio" />
+                <ScalarProperty Name="nombre_servicio" ColumnName="nombre_servicio" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="duracion" ColumnName="duracion" />
+                <ScalarProperty Name="imagen_servicio" ColumnName="imagen_servicio" />
+                <ScalarProperty Name="fecha_creacion" ColumnName="fecha_creacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Status">
+            <EntityTypeMapping TypeName="LubriXpressModel.Status">
+              <MappingFragment StoreEntitySet="Status">
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuarios">
+            <EntityTypeMapping TypeName="LubriXpressModel.Usuario">
+              <MappingFragment StoreEntitySet="Usuarios">
+                <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+                <ScalarProperty Name="cedula" ColumnName="cedula" />
+                <ScalarProperty Name="fecha_nacimiento" ColumnName="fecha_nacimiento" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="contrasena" ColumnName="contrasena" />
+                <ScalarProperty Name="id_rol" ColumnName="id_rol" />
+                <ScalarProperty Name="fecha_creacion" ColumnName="fecha_creacion" />
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="lastactivity" ColumnName="lastactivity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="ActualizarUsuario" FunctionName="LubriXpressModel.Store.ActualizarUsuario" />
+          <FunctionImportMapping FunctionImportName="Crearcarro" FunctionName="LubriXpressModel.Store.Crearcarro" />
+          <FunctionImportMapping FunctionImportName="CrearCita" FunctionName="LubriXpressModel.Store.CrearCita" />
+          <FunctionImportMapping FunctionImportName="CrearResena" FunctionName="LubriXpressModel.Store.CrearResena" />
+          <FunctionImportMapping FunctionImportName="CrearRol" FunctionName="LubriXpressModel.Store.CrearRol" />
+          <FunctionImportMapping FunctionImportName="CrearServicio" FunctionName="LubriXpressModel.Store.CrearServicio" />
+          <FunctionImportMapping FunctionImportName="CrearUsuario" FunctionName="LubriXpressModel.Store.CrearUsuario" />
+          <FunctionImportMapping FunctionImportName="EditarCitas" FunctionName="LubriXpressModel.Store.EditarCitas" />
+          <FunctionImportMapping FunctionImportName="EditarRol" FunctionName="LubriXpressModel.Store.EditarRol" />
+          <FunctionImportMapping FunctionImportName="EditarServicio" FunctionName="LubriXpressModel.Store.EditarServicio" />
+          <FunctionImportMapping FunctionImportName="EditCar" FunctionName="LubriXpressModel.Store.EditCar" />
+          <FunctionImportMapping FunctionImportName="EliminarCarro" FunctionName="LubriXpressModel.Store.EliminarCarro" />
+          <FunctionImportMapping FunctionImportName="EliminarCita" FunctionName="LubriXpressModel.Store.EliminarCita" />
+          <FunctionImportMapping FunctionImportName="EliminarResena" FunctionName="LubriXpressModel.Store.EliminarResena" />
+          <FunctionImportMapping FunctionImportName="EliminarRol" FunctionName="LubriXpressModel.Store.EliminarRol" />
+          <FunctionImportMapping FunctionImportName="EliminarServicio" FunctionName="LubriXpressModel.Store.EliminarServicio" />
+          <FunctionImportMapping FunctionImportName="EliminarUsuario" FunctionName="LubriXpressModel.Store.EliminarUsuario" />
+          <FunctionImportMapping FunctionImportName="IniciarSesion" FunctionName="LubriXpressModel.Store.IniciarSesion">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LubriXpressModel.IniciarSesion_Result">
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="id_Rol" ColumnName="id_Rol" />
+                <ScalarProperty Name="nombre_rol" ColumnName="nombre_rol" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Login" FunctionName="LubriXpressModel.Store.Login">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LubriXpressModel.Login_Result">
+                <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="id_rol" ColumnName="id_rol" />
+                <ScalarProperty Name="nombre_rol" ColumnName="nombre_rol" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SeeStatus" FunctionName="LubriXpressModel.Store.SeeStatus">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LubriXpressModel.SeeStatus_Result">
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UsuarioXcedula" FunctionName="LubriXpressModel.Store.UsuarioXcedula">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LubriXpressModel.UsuarioXcedula_Result">
+                <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+                <ScalarProperty Name="cedula" ColumnName="cedula" />
+                <ScalarProperty Name="fecha_nacimiento" ColumnName="fecha_nacimiento" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="contrasena" ColumnName="contrasena" />
+                <ScalarProperty Name="id_rol" ColumnName="id_rol" />
+                <ScalarProperty Name="fecha_creacion" ColumnName="fecha_creacion" />
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="lastactivity" ColumnName="lastactivity" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UsuarioXid" FunctionName="LubriXpressModel.Store.UsuarioXid">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LubriXpressModel.UsuarioXid_Result">
+                <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+                <ScalarProperty Name="cedula" ColumnName="cedula" />
+                <ScalarProperty Name="fecha_nacimiento" ColumnName="fecha_nacimiento" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="contrasena" ColumnName="contrasena" />
+                <ScalarProperty Name="id_rol" ColumnName="id_rol" />
+                <ScalarProperty Name="fecha_creacion" ColumnName="fecha_creacion" />
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="lastactivity" ColumnName="lastactivity" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="VerActivos" FunctionName="LubriXpressModel.Store.VerActivos">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LubriXpressModel.VerActivos_Result">
+                <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+                <ScalarProperty Name="cedula" ColumnName="cedula" />
+                <ScalarProperty Name="fecha_nacimiento" ColumnName="fecha_nacimiento" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="contrasena" ColumnName="contrasena" />
+                <ScalarProperty Name="id_rol" ColumnName="id_rol" />
+                <ScalarProperty Name="fecha_creacion" ColumnName="fecha_creacion" />
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="lastactivity" ColumnName="lastactivity" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="VerCaros" FunctionName="LubriXpressModel.Store.VerCaros">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LubriXpressModel.VerCaros_Result">
+                <ScalarProperty Name="placa" ColumnName="placa" />
+                <ScalarProperty Name="marca" ColumnName="marca" />
+                <ScalarProperty Name="modelo" ColumnName="modelo" />
+                <ScalarProperty Name="anio" ColumnName="anio" />
+                <ScalarProperty Name="motor" ColumnName="motor" />
+                <ScalarProperty Name="VIN" ColumnName="VIN" />
+                <ScalarProperty Name="comentario" ColumnName="comentario" />
+                <ScalarProperty Name="fecha_creacion" ColumnName="fecha_creacion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="VerCarroPorPlaca" FunctionName="LubriXpressModel.Store.VerCarroPorPlaca">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LubriXpressModel.VerCarroPorPlaca_Result">
+                <ScalarProperty Name="placa" ColumnName="placa" />
+                <ScalarProperty Name="marca" ColumnName="marca" />
+                <ScalarProperty Name="modelo" ColumnName="modelo" />
+                <ScalarProperty Name="anio" ColumnName="anio" />
+                <ScalarProperty Name="motor" ColumnName="motor" />
+                <ScalarProperty Name="VIN" ColumnName="VIN" />
+                <ScalarProperty Name="comentario" ColumnName="comentario" />
+                <ScalarProperty Name="fecha_creacion" ColumnName="fecha_creacion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="VerCitas" FunctionName="LubriXpressModel.Store.VerCitas">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LubriXpressModel.VerCitas_Result">
+                <ScalarProperty Name="id_cita" ColumnName="id_cita" />
+                <ScalarProperty Name="nombre_cliente" ColumnName="nombre_cliente" />
+                <ScalarProperty Name="apellidos_cliente" ColumnName="apellidos_cliente" />
+                <ScalarProperty Name="telefono_cliente" ColumnName="telefono_cliente" />
+                <ScalarProperty Name="email_cliente" ColumnName="email_cliente" />
+                <ScalarProperty Name="direccion" ColumnName="direccion" />
+                <ScalarProperty Name="servicio_solicitado" ColumnName="servicio_solicitado" />
+                <ScalarProperty Name="fecha_estimada" ColumnName="fecha_estimada" />
+                <ScalarProperty Name="marca_vehiculo" ColumnName="marca_vehiculo" />
+                <ScalarProperty Name="modelo_vehiculo" ColumnName="modelo_vehiculo" />
+                <ScalarProperty Name="placa_vehiculo" ColumnName="placa_vehiculo" />
+                <ScalarProperty Name="anio_vehiculo" ColumnName="anio_vehiculo" />
+                <ScalarProperty Name="estado_cita" ColumnName="estado_cita" />
+                <ScalarProperty Name="fecha_creacion" ColumnName="fecha_creacion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="VerResenaPorId" FunctionName="LubriXpressModel.Store.VerResenaPorId">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LubriXpressModel.VerResenaPorId_Result">
+                <ScalarProperty Name="id_resena" ColumnName="id_resena" />
+                <ScalarProperty Name="nombre_cliente" ColumnName="nombre_cliente" />
+                <ScalarProperty Name="apellidos_cliente" ColumnName="apellidos_cliente" />
+                <ScalarProperty Name="telefono_cliente" ColumnName="telefono_cliente" />
+                <ScalarProperty Name="email_cliente" ColumnName="email_cliente" />
+                <ScalarProperty Name="calificacion" ColumnName="calificacion" />
+                <ScalarProperty Name="comentario" ColumnName="comentario" />
+                <ScalarProperty Name="fecha_creacion" ColumnName="fecha_creacion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="VerResenas" FunctionName="LubriXpressModel.Store.VerResenas">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LubriXpressModel.VerResenas_Result">
+                <ScalarProperty Name="id_resena" ColumnName="id_resena" />
+                <ScalarProperty Name="nombre_cliente" ColumnName="nombre_cliente" />
+                <ScalarProperty Name="apellidos_cliente" ColumnName="apellidos_cliente" />
+                <ScalarProperty Name="telefono_cliente" ColumnName="telefono_cliente" />
+                <ScalarProperty Name="email_cliente" ColumnName="email_cliente" />
+                <ScalarProperty Name="calificacion" ColumnName="calificacion" />
+                <ScalarProperty Name="comentario" ColumnName="comentario" />
+                <ScalarProperty Name="fecha_creacion" ColumnName="fecha_creacion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="VerRoles" FunctionName="LubriXpressModel.Store.VerRoles">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LubriXpressModel.VerRoles_Result">
+                <ScalarProperty Name="id_rol" ColumnName="id_rol" />
+                <ScalarProperty Name="nombre_rol" ColumnName="nombre_rol" />
+                <ScalarProperty Name="fecha_creacion" ColumnName="fecha_creacion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="VerRolPorId" FunctionName="LubriXpressModel.Store.VerRolPorId">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LubriXpressModel.VerRolPorId_Result">
+                <ScalarProperty Name="id_rol" ColumnName="id_rol" />
+                <ScalarProperty Name="nombre_rol" ColumnName="nombre_rol" />
+                <ScalarProperty Name="fecha_creacion" ColumnName="fecha_creacion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="VerServicios" FunctionName="LubriXpressModel.Store.VerServicios">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LubriXpressModel.VerServicios_Result">
+                <ScalarProperty Name="id_servicio" ColumnName="id_servicio" />
+                <ScalarProperty Name="nombre_servicio" ColumnName="nombre_servicio" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="duracion" ColumnName="duracion" />
+                <ScalarProperty Name="imagen_servicio" ColumnName="imagen_servicio" />
+                <ScalarProperty Name="fecha_creacion" ColumnName="fecha_creacion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="VerUsuarioPorId" FunctionName="LubriXpressModel.Store.VerUsuarioPorId">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LubriXpressModel.VerUsuarioPorId_Result">
+                <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="nombre_rol" ColumnName="nombre_rol" />
+                <ScalarProperty Name="fecha_creacion" ColumnName="fecha_creacion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="VerUsuarios" FunctionName="LubriXpressModel.Store.VerUsuarios">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LubriXpressModel.VerUsuarios_Result">
+                <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+                <ScalarProperty Name="cedula" ColumnName="cedula" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="fecha_nacimiento" ColumnName="fecha_nacimiento" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="nombre_rol" ColumnName="nombre_rol" />
+                <ScalarProperty Name="fecha_creacion" ColumnName="fecha_creacion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

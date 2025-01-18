@@ -1,0 +1,228 @@
+﻿@model IEnumerable<Web_LX.Entities.UserEnt>
+@{
+    ViewBag.Title = "ListPaymets";
+    Layout = "~/Views/Shared/_Layout_Administration.cshtml";
+}
+
+
+<heah>
+    <link rel="stylesheet" href="~/assets/Administration/css/datatable/jquery.dataTables.min.css" />
+    <link rel="stylesheet" href="~/assets/Administration/css/datatable/buttons.dataTables.min.css" />
+    <link rel="stylesheet" href="~/assets/Administration/css/datatable/1.5.1_css_dataTables.dateTime.min.css" />
+
+    <script defer src="~/assets/Administration/js/DataTable/code.jquery.com_jquery-3.7.0.js"></script>
+    <script defer src="~/assets/Administration/js/DataTable/cdn.datatables.net_1.13.5_js_jquery.dataTables.min.js"></script>
+    <script defer src="~/assets/Administration/js/DataTable/cdn.datatables.net_buttons_2.4.1_js_dataTables.buttons.min.js"></script>
+    <script defer src="~/assets/Administration/js/DataTable/cdnjs.cloudflare.com_ajax_libs_jszip_3.10.1_jszip.min.js"></script>
+    <script defer src="~/assets/Administration/js/DataTable/cdnjs.cloudflare.com_ajax_libs_pdfmake_0.1.53_pdfmake.min.js"></script>
+    <script defer src="~/assets/Administration/js/DataTable/cdnjs.cloudflare.com_ajax_libs_pdfmake_0.1.53_vfs_fonts.js"></script>
+    <script defer src="~/assets/Administration/js/DataTable/cdn.datatables.net_buttons_2.4.1_js_buttons.html5.min.js"></script>
+    <script defer src="~/assets/Administration/js/DataTable/cdn.datatables.net_buttons_2.4.1_js_buttons.print.min.js"></script>
+    <script defer src="~/assets/Administration/js/DataTable/2.29.2_moment.min.js"></script>
+    <script defer src="~/assets/Administration/js/DataTable/1.5.1_js_dataTables.dateTime.min.js"></script>
+
+    <script defer src="~/assets/Administration/js/DataTable/DataTableUsers.js"></script>
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+</heah>
+
+
+<main id="main" class="main">
+    <div class="pagetitle">
+        <h1>Lista de Usuarios</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="@Url.Action("Index","Admin")">Inicio</a></li>
+                <li class="breadcrumb-item">Usuarios</li>
+                <li class="breadcrumb-item">Lista de Usuarios</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section">
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        </br>
+
+                        @if (ViewBag.MsjPantallaPostivo != null)
+                        {
+                            <div id="mensajePositivo" style="text-align:center" class="alert alert-success" role="alert">
+                                @ViewBag.MsjPantallaPostivo
+                            </div>
+                        }
+                        @if (ViewBag.MsjPantallaNegativo != null)
+                        {
+                            <div id="mensajeNegativo" style="text-align:center" class="alert alert-danger" role="alert">
+                                @ViewBag.MsjPantallaNegativo
+                            </div>
+                        }
+
+                        <div>
+                            <a type="submit" class="btn  text-white" href="@Url.Action("CreatePayments", "Payments")" style="background-color: #5f81e8; display: inline-block; margin-bottom: 5px; margin-top:10px">Ingresar Pago</a>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="table-responsive">
+                                    <table id="DataTable" class="table table-hover text-center" width="100%">
+
+
+                                        <thead>
+
+
+                                            <tr>
+                                                <th style="text-align:center">ID Usuario </th>
+                                                <th style="text-align:center">Cedula</th>
+                                                <th style="text-align:center">Nombre</th>
+                                                <th style="text-align:center">Fecha de Nacimiento</th>
+                                                <th style="text-align:center">Correo Electrónico</th>
+                                                <th style="text-align:center">Rol </th>
+                                                <th style="text-align:center">Fecha de Creación</th>
+                                                <th style="text-align:center">Estatus </th>
+                                                <th style="text-align:center">Ultima Conexión</th>
+
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            @foreach (var item in Model)
+                                            {
+                                                <tr class="payment-row" data-payment-id="@item.id_usuario">
+                                                    <td>@item.id_usuario</td>
+                                                    <td>@item.cedula</td>
+                                                    <td>@item.fecha_nacimiento</td>
+                                                    <td>@item.nombre</td>
+                                                    <td>@item.email</td>
+                                                    <td>@item.nombre_rol</td>
+                                                    <td>@item.fecha_creacion.ToShortDateString()</td>
+                                                    <td>@item.lastactivity.ToShortDateString()</td>
+                                                    <td style="align-content:i">
+                                                        <a type="submit" class="btn  text-white" href="@Url.Action("EditPayment", "Payments", new { i = item.id_usuario })" style="background-color: #5f81e8; display: inline-block; margin-bottom: 5px;"><i class="bi bi-pencil-square"></i> Editar</a>
+
+                                                        <a class="btn btn-danger text-white" href="#" onclick="openDeleteConfirmationModal(@item.id_usuario)">
+                                                            <i class="bi bi-trash"></i>
+                                                        </a>
+
+                                                    </td>
+
+
+
+
+                                                </tr>
+
+                                            }
+
+
+                                        </tbody>
+
+                                        <tfoot>
+                                            <tr>
+                                                <th style="text-align:center"># Referencia </th>
+                                                <th style="text-align:center">Cedula</th>
+                                                <th style="text-align:center">Nombre</th>
+                                                <th style="text-align:center">Fecha</th>
+                                                <th style="text-align:center">Monto</th>
+                                                <th style="text-align:center">Tipo de Pago</th>
+                                                <th style="text-align:center">Entrada o Salida</th>
+                                                <th style="text-align:center">Motivo</th>
+                                                <th style="text-align:center">Acción</th>
+
+
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-2 order-lg-3 ms-auto">
+                            <button type="button" class="btn btn-secondary m-0 mb-3" onclick="window.history.back();">Regresar</button>
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+
+    <div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel">
+        <div class="modal-dialog justify-content-center align-items-center" style="margin-top: 15%">
+            <div class="modal-content justify-content-center align-items-center">
+                <div class="modal-header align-items-center">
+                    <h5 class="modal-title justify-content-center align-items-center"><i class="bi bi-award-fill text-danger"></i> Confirmar Eliminación <i class="bi bi-award-fill text-danger"></i></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" style="text-align:center">
+                    ¿Estás seguro de que deseas eliminar este pago?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-danger" id="confirmDeleteBtn">Eliminar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</main><!-- End #main -->
+<!-- ... (código anterior) ... -->
+
+<script>
+    function openDeleteConfirmationModal(paymentId) {
+        $('#confirmDeleteBtn').data('payment-id', paymentId);
+        $('#confirmDeleteModal').modal('show');
+    }
+    // Agrega un estilo CSS para ocultar las filas al cargar la página
+    $('head').append('<style>.payment-row { display: none; }</style>');
+
+    $(document).ready(function () {
+        var deletedPayments = JSON.parse(localStorage.getItem('deletedPayments')) || [];
+
+        for (var i = 0; i < deletedPayments.length; i++) {
+            // Elimina las filas correspondientes a los pagos eliminados
+            $('.payment-row[data-payment-id="' + deletedPayments[i] + '"]').remove();
+        }
+
+        // Muestra las filas después de cargar completamente la página
+        $('.payment-row').css('display', 'table-row');
+    });
+
+
+    $('#confirmDeleteBtn').on('click', function () {
+        var paymentId = $(this).data('payment-id');
+
+        // Elimina la fila correspondiente al ID del pago
+        $('.payment-row[data-payment-id="' + paymentId + '"]').remove();
+
+        // Almacena el ID del pago eliminado
+        var deletedPayments = JSON.parse(localStorage.getItem('deletedPayments')) || [];
+        deletedPayments.push(paymentId);
+        localStorage.setItem('deletedPayments', JSON.stringify(deletedPayments));
+
+        $('#confirmDeleteModal').modal('hide');
+    });
+
+    // Verifica y elimina las filas eliminadas al cargar la página
+    $(document).ready(function () {
+        var deletedPayments = JSON.parse(localStorage.getItem('deletedPayments')) || [];
+
+        for (var i = 0; i < deletedPayments.length; i++) {
+            // Elimina las filas correspondientes a los pagos eliminados
+            $('.payment-row[data-payment-id="' + deletedPayments[i] + '"]').remove();
+        }
+    });
+
+</script>
+
+
+

@@ -1,0 +1,164 @@
+@model IEnumerable<LubriXpress.Entities.RegistrationEnt>
+
+@{
+    ViewBag.Title = "ConsultarMatriculas";
+    Layout = "~/Views/Shared/_Layout_Administration.cshtml";
+}
+
+<heah>
+
+    <link rel="stylesheet" href="~/assets/Administration/css/datatable/jquery.dataTables.min.css" />
+    <link rel="stylesheet" href="~/assets/Administration/css/datatable/buttons.dataTables.min.css" />
+    <link rel="stylesheet" href="~/assets/Administration/css/datatable/1.5.1_css_dataTables.dateTime.min.css" />
+
+    <script defer src="~/assets/Administration/js/DataTable/code.jquery.com_jquery-3.7.0.js"></script>
+    <script defer src="~/assets/Administration/js/DataTable/cdn.datatables.net_1.13.5_js_jquery.dataTables.min.js"></script>
+    <script defer src="~/assets/Administration/js/DataTable/cdn.datatables.net_buttons_2.4.1_js_dataTables.buttons.min.js"></script>
+    <script defer src="~/assets/Administration/js/DataTable/cdnjs.cloudflare.com_ajax_libs_jszip_3.10.1_jszip.min.js"></script>
+    <script defer src="~/assets/Administration/js/DataTable/cdnjs.cloudflare.com_ajax_libs_pdfmake_0.1.53_pdfmake.min.js"></script>
+    <script defer src="~/assets/Administration/js/DataTable/cdnjs.cloudflare.com_ajax_libs_pdfmake_0.1.53_vfs_fonts.js"></script>
+    <script defer src="~/assets/Administration/js/DataTable/cdn.datatables.net_buttons_2.4.1_js_buttons.html5.min.js"></script>
+    <script defer src="~/assets/Administration/js/DataTable/cdn.datatables.net_buttons_2.4.1_js_buttons.print.min.js"></script>
+
+    <script defer src="~/assets/Administration/js/DataTable/2.29.2_moment.min.js"></script>
+    <script defer src="~/assets/Administration/js/DataTable/1.5.1_js_dataTables.dateTime.min.js"></script>
+
+    <script defer src="~/assets/Administration/js/DataTable/DataTableRegistration.js"></script>
+
+</heah>
+
+
+<main id="main" class="main">
+    <div class="pagetitle">
+        <h1>Lista de Matriculas</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/Administration/Inicio">Inicio</a></li>
+                <li class="breadcrumb-item">Matriculas</li>
+            </ol>
+        </nav>
+    </div>
+
+<section class="section">
+    <div class="row">
+        <div class="col-lg-12">
+
+            <div class="card">
+                <div class="card-body">
+
+                    <br />
+                    @if (ViewBag.MsjPantallaPositivo != null)
+                    {
+                        <div id="mensaje" style="text-align:center" class="alert alert-success" role="alert">
+                            @ViewBag.MsjPantallaPositivo
+                        </div>
+                    }
+                    @if (ViewBag.MsjPantallaNegativo != null)
+                    {
+                        <div id="mensaje" style="text-align:center" class="alert alert-danger" role="alert">
+                            @ViewBag.MsjPantallaNegativo
+                        </div>
+                    }
+                    <br />
+                    <div class="row">
+                        <br>
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+
+
+                                    <br />
+
+                                    <table border="0" cellspacing="5" cellpadding="5">
+                                        <tbody>
+                                            <tr>
+                                                <td>Fecha Inicio:</td>
+                                                <td><input type="text" id="min" name="min" class="form-control"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Fecha Fin:</td>
+                                                <td><input type="text" id="max" name="max" class="form-control"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <br />
+                                    <table id="DataTable" class="table table-hover display nowrap" style="width: 100% !important;">
+                                        <thead>
+                                            <tr>
+                                                <th style="text-align:center">Cedula</th>
+                                                <th style="text-align:center">Nombre</th>
+                                                <th style="text-align:center">Telefono</th>
+                                                <th style="text-align:center">Curso</th>
+                                                <th style="text-align:center">Modalidad</th>
+                                                <th style="text-align:center">Nivel</th>
+                                                <th style="text-align:center">Fecha</th>
+                                                <th style="text-align:center">Estado</th>
+                                                <th style="text-align:center">Accion</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            @foreach (var item in Model)
+                                            {
+                                                <tr style="text-align:center">
+                                                    <td>@item.PersonalID</td>
+                                                    <td>@item.Name</td>
+                                                    <td>@item.Phone</td>
+                                                    <td>@item.CourseName</td>
+                                                    <td>@item.Modality</td>
+                                                    <td>@item.Level</td>
+                                                    <td>@item.RegistrationDate.ToString("dd-MM-yyyy")</td>
+                                                    <td>@item.Status</td>
+                                                    <td style="text-align:center">
+                                                        <a type="submit" class="btn btn-sm text-white" style="background-color: #5f81e8;" href="@Url.Action("ConsultRegister","Registration", new { i = item.RegistrationId})">Consultar</a>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <th style="text-align:center">Cedula</th>
+                                                <th style="text-align:center">Nombre</th>
+                                                <th style="text-align:center">Telefono</th>
+                                                <th style="text-align:center">Curso</th>
+                                                <th style="text-align:center">Modalidad</th>
+                                                <th style="text-align:center">Nivel</th>
+                                                <th style="text-align:center">Fecha</th>
+                                                <th style="text-align:center">Estado</th>
+                                                <th style="text-align:center">Accion</th>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-1">
+                                    <a href="@Url.Action("Index", "Admin")" class="btn btn-secondary">Regresar</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </section>
+</main>
+
+
+<script>
+    // Esperar 5 segundos y luego ocultar el mensaje
+    setTimeout(function () {
+
+        var mensajeDiv = document.getElementById('mensaje');
+        if (mensajeDiv != null) {
+            mensajeDiv.style.display = 'none';
+        }
+
+        Session["MensajePositivo"] = 0;
+
+
+    }, 5000); // 5000 milisegundos = 5 segundos
+</script>
+
