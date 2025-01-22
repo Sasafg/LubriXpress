@@ -8,7 +8,7 @@ using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
-//using System.Windows.Media.Media3D;
+using System.Windows.Media.Media3D;
 
 namespace Web_LX.Controllers
 {

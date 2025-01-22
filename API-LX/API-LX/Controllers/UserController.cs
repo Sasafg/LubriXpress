@@ -26,43 +26,53 @@ namespace API_LX.Controllers
         {
             try
             {
+                if (ent == null || string.IsNullOrEmpty(ent.cedula) || string.IsNullOrEmpty(ent.contrasena))
+                {
+                    throw new ArgumentException("Datos de entrada no válidos.");
+                }
+
                 using (var bd = new LubriXpressEntities())
                 {
                     // Desencriptar la contraseña
                     var result = util.Decrypt(ent.contrasena);
+                    if (string.IsNullOrEmpty(result))
+                    {
+                        throw new Exception("Error al desencriptar la contraseña.");
+                    }
 
                     // Llamada al procedimiento almacenado de login
                     var data = bd.Login(ent.cedula, result).FirstOrDefault();
-
-                    if (data != null)
+                    if (data == null)
                     {
-                        if (data.StatusId == 1)
-                        {
-                            // Construir el objeto de respuesta para el usuario
-                            UserEnt res = new UserEnt();
-                            res.id_usuario = data.id_usuario;
-                            res.nombre = data.nombre;
-                            res.StatusId = Convert.ToInt64(data.StatusId);  // Convertir a long si es necesario
-                            res.id_rol = data.id_rol;
-                            res.nombre_rol = data.nombre_rol;
-                            res.Token = tokGenerator.GenerateTokenJwt(data.id_usuario);
-
-                            return res;
-                        }
-                        return null;  // Si el estado no es 1 (activo)
+                        return null;  // Usuario no encontrado
                     }
 
-                    return null;  // Si no se encuentra el usuario
+                    if (data.StatusId != 1)
+                    {
+                        return null;  // Usuario no activo
+                    }
+
+                    // Construir el objeto de respuesta
+                    var res = new UserEnt
+                    {
+                        id_usuario = data.id_usuario,
+                        nombre = data.nombre,
+                        StatusId = data.StatusId ?? 0,
+                        id_rol = data.id_rol,
+                        nombre_rol = data.nombre_rol ?? string.Empty,
+                        Token = tokGenerator.GenerateTokenJwt(data.id_usuario)
+                    };
+
+                    return res;
                 }
             }
             catch (Exception ex)
             {
-                // Capturar la excepción y devolver null
-                var exept = ex.Message;
+                // Manejo de excepciones
+                Console.WriteLine($"Error en Login: {ex.Message}");
                 return null;
             }
         }
-
 
 
         [HttpGet]
